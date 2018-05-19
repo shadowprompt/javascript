@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>HTML+CSS兼容性</title>
+    <link rel="stylesheet" type="text/css" href="../weui/style/weui.css">
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            /*border: 1px solid darkred;*/
+            font-family: "PingFang SC";
+        }
+        header {
+            margin: 0 auto;
+        }
+        .imgDiv{
+            /*width: 50px;*/
+            /*height: 50px;*/
+            /*position: relative;*/
+            /*vertical-align:top;*/
+            /*line-height: 0;*/
+        }
+        .imgDiv img{
+            width: 50px;
+            height: 50px;
+            /*display: block;*/
+            vertical-align:middle;
+        }
+        #threeDiv{
+            border: 1px solid darkred;
+            vertical-align: middle;
+            display: table-cell;
+           /*justify-content:center;*/
+           /*align-items:center;*/
+           /*display: table-cell;
+            vertical-align: middle;
+            text-align: center;  */
+            position: relative;
+        }
+        .three1{
+            float: left;
+            margin: auto 0;
+        }
+        .three2{
+            background: #ccc;
+            float: left;
+            width: 24%
+        }
+        .three3{
+            float: right;
+            width: 60%;
+            display: block;
+            margin: auto 5px;
+        }
+    </style>
+</head>
+<body>
+    <header>呵呵</header>
+    <div id="main">
+        <article></article>
+        <sidebar></sidebar>
+    </div>
+    <div class="imgDiv">
+        <img src="" alt="heh">
+    </div>
+    <div class="weui-navbar">
+        <div class="weui-navbar__item weui-bar__item_on">
+            选项一
+        </div>
+        <div class="weui-navbar__item">
+            选项二
+        </div>
+        <div class="weui-navbar__item">
+            选项三
+        </div>
+    </div>
+    <br />
+    <div id="threeDiv">
+        <div class="three1">dfadfa</div>
+        <div class="three2">人生得意须尽欢，莫使金樽空对月</div>
+        <span class="three3">婚多年，有一堆双胞胎女儿，拖家带口的人多；</span>
+        <div style="clear:both"></div>
+    </div>
+</body>
+</html>

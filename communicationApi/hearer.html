@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Hearer</title>
+	<script>
+	window.onload = function(){
+		if(typeof window.postMessage == undefined){
+			alert("当前浏览器不支持postMessage");
+			return;
+		}
+    window.addEventListener('message', function(ev){
+    	if(ev.origin != "http://localhost:8080"){
+    		return;
+    	}
+    	console.log("sender from " + ev.origin );
+    	console.log(ev);
+    }, false);
+	}
+	</script>
+</head>
+<body>
+	<iframe id="cc" src="http://localhost:8080/caller.html" width="200"></iframe>
+</body>
+</html>

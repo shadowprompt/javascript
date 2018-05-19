@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html ng-app="Test">
+
+<head>
+  <script src="js/Angular1.5.5.js" data-semver="1.5.5" data-require="angular.js@*"></script>
+</head>
+<title>Include</title>
+<body ng-controller="DemoCtrl">
+  <div>
+    <input type="text" ng-model="info.cc.search" >
+  </div>
+  显示1{{ info.cc.search}}<br />
+  ---header.html内容开始---
+  <ng-include src="'header.html'"></ng-include>
+   <br />---header.html内容结束---<br />
+  显示2：{{ info.search }} 
+
+  <div>
+    <input type="text" ng-model="test.ipt" placeholder="属性方式清空"/>
+    <input type="text" ng-model="ipt" placeholder="变量方式清除"/>
+    <button ng-click="clear()">清空内容</button>    
+  </div>    
+    ------------------------------------------------------
+  <div ng-controller="customersCtrl">获取"Customers_JSON.php"里面的内容
+    <ul>
+      <li ng-repeat="x in names">
+        {{ x.Name + ', ' + x.Country }}
+      </li>
+    </ul>
+
+  </div>
+
+  <script>
+  'use strict';
+  var app = angular.module('Test',[]);
+  app.controller('DemoCtrl', function($scope){
+
+    $scope.info = {
+      cc: {
+        search: "",
+      },
+      search: '',
+      t: 'test'
+    };
+    $scope.ct= "kk";
+
+    $scope.test = {};
+    $scope.clear = function () {
+      $scope.test.ipt = "";
+      $scope.ipt = "";
+    };
+  });
+
+  app.controller('customersCtrl', function($scope, $http) {
+    
+    var config = {}; //设置请求相关信息
+    config.method = "GET";
+    $http.get("Customers_JSON.php",config)
+    .then(function(response) {
+      console.log(arguments);
+      $scope.names = response.data.records;
+     
+    }, function(a, b, c, d){
+       console.log(d.url);
+      $scope.names = [{"Name":"Wrong","Country":"WrongCity"}];
+      console.log( $scope.names);
+    });
+    // );
+  });
+  </script>
+
+</body>
+
+</html>

@@ -1,0 +1,108 @@
+<html>
+<head>
+   <meta charset="utf-8">
+   <title>Router</title>
+</head>
+<body ng-app='routingDemoApp'>
+
+    <div ng-controller="myCtrl">
+        <ul>
+            <li><a href="#/">首页</a></li>
+            <li><a href="#/computers">电脑</a></li>
+            <li><a href="#/printers">打印机</a></li>
+            <li><a href="#/or">电脑or打印机</a></li>
+            <li><a href="#/test/routeParams">测试routeParams</a></li>
+            <li><a href="#/blabla">其他</a></li>
+        </ul>
+
+        <div ng-view></div> <!-- 该div里面的内容将根据router改变 -->
+    </div>
+
+    <script src="js/Angular1.5.5.js"></script>
+    <script src="js/angular-router.js"></script>
+
+    <script>
+    angular.module('routingDemoApp',['ngRoute'])
+    .config(['$routeProvider', function($routeProvider){
+        $routeProvider
+                .when('/',{
+                    template:'这是首页页面，利用template纯文字显示'
+                })  //如果我们只需要在 ng-view 中插入简单的 HTML 内容，则使用此参数：
+                .when('/computers',{
+                    templateUrl: 'computers.htm', 
+                    controller: 'cCtrl',
+                    resolve: {
+                          // I will cause a 3 second delay
+                        de: function($q, $timeout) {
+                            var delay = $q.defer();
+                            console.log(delay);
+                            $timeout(delay.resolve, 1000);
+                            return delay.promise;
+                        }
+                    }
+                }) //如果我们只需要在 ng-view 中插入 HTML 模板文件，则使用此参数：
+                .when('/printers',{
+                    templateUrl: 'embedded.printers.html',
+                    controller: 'PrintController'
+                })
+                .when('/test/:name',{
+                    template:'<h2>测试routeParams</h2>',
+                    controller:'routeCtrl',
+                })
+                .when('/or',{
+                    redirectTo: function(route, path, search){ //随机显示电脑页面或者打印机页面
+                        var rand = Math.floor((Math.random()*10)+1);
+                        console.log(rand);
+                        var result;
+                        if(rand>5){
+                            result = "/computers"
+                        }else{
+                            result = "/printers";
+                        }
+                        return result;
+                        
+                    }
+                })
+                .otherwise({
+                    redirectTo:'/'
+                });
+    }])
+    .run(['$rootScope', '$location', function($rootScope, $location){
+        $rootScope.$on('$routeChangeStart', function(evt, next, current){
+            console.log(current);
+        });
+        $rootScope.$on('$routeChangeSuccess', function(evt, next, previous){
+            console.log(previous);
+        })
+    }])
+    .controller('myCtrl', function($scope, $location){
+        $scope.$on("$viewContentLoaded",function(){
+            console.log("ng-view content loaded!");
+        });
+
+        $scope.$on("$routeChangeStart",function(event,next,current){
+            //event.preventDefault(); //cancel url change
+            console.log("route change start!");
+        });
+    })
+    .controller('cCtrl', function ($scope, $location) {
+        console.log($location.$$url);
+        console.log($location.absUrl());
+        $location.search({name: 'Ari',username: 'auser'});
+        $scope.hello = "Hello";
+    })
+    .controller('PrintController', function ($scope) {
+        $scope.sayHi = {
+            hi:"你好，我是在controller里面显示出来的"
+        };
+    })
+    .controller('routeCtrl', function($scope, $routeParams){
+        console.log($routeParams);
+    })
+    </script>
+    <script type="text/ng-template" id="embedded.printers.html">
+        <h4> embedded.printers.html是不存在的，利用script标签显示出来的</h4> 
+        <div ng-controller="PrintController">{{sayHi.hi}}</div>
+    </script>
+</body>
+</html>

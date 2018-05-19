@@ -1,0 +1,65 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Untitled Document</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<meta name="viewport" content="width=device-width,height=device-height, user-scalable=no,initial-scale=1, minimum-scale=1, maximum-scale=1,target-densitydpi=device-dpi ">
+<style type="text/css">
+body {margin:0;padding:0}
+#container {width:605px}
+table#name {
+  width:100px;
+  background:#ffffcc;
+  float:left;
+}
+table#data {
+  background:#ffffcc;
+  width:900px;
+}
+td {
+  border:1px solid red;
+}
+#data td {width:100px;}
+#wrap{
+  width:500px;
+  overflow:auto;
+  overflow-y:hidden;
+  border-right:1px solid red;
+  float:left;
+}
+.bottom {background:#ccc}
+</style>
+</head>
+<body>
+<div id="container">
+  <table id="name" cellspacing="0" cellpadding="0">
+    <tr><td>&nbsp;</td></tr>
+    <tr><td>A</td></tr>
+    <tr><td>A</td></tr>
+    <tr><td>A</td></tr>
+    <tr>
+      <td class="bottom">&nbsp;</td>
+    </tr>
+  </table>
+  <div id="wrap">
+    <table id="data" cellspacing="0" cellpadding="0">
+      <tr>
+        <td>A</td><td>B</td><td>C</td><td>D</td><td>E</td><td>F</td><td>G</td><td>H</td><td>I</td>
+      </tr>
+      <tr>
+        <td>1</td><td>3</td><td>5</td><td>1</td><td>1</td><td>3</td><td>1</td><td>5</td><td>7</td>
+      </tr>
+      <tr>
+        <td>2</td><td>4</td><td>6</td><td>1</td><td>2</td><td>4</td><td>1</td><td>6</td><td>6</td>
+      </tr>
+      <tr>
+        <td>2</td><td>4</td><td>6</td><td>1</td><td>2</td><td>4</td><td>1</td><td>6</td><td>6</td>
+      </tr>
+      <tr>
+        <td class="bottom" colspan="9">&nbsp;</td>
+      </tr>
+    </table>
+  </div>
+</div>
+</body>
+</html>

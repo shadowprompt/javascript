@@ -1,0 +1,12 @@
+微信公众帐号
+daozhaocom
+
+gh_33e1d778cade
+
+AppID      wx6c67fe0f86185bb3
+AppSecret  79153050519a76795e1271290eeb6b61
+
+微信小程序
+道招助手
+AppID      wx586e08b2ad57a404
+AppSecret  0c50fc1c2908a3a7f9a143c99bbe49ed

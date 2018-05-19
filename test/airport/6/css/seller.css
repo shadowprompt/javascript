@@ -1,0 +1,478 @@
+/*通用*/
+*{
+    box-sizing: border-box;
+}
+body{
+    font:12px "microsoft yahei",Arial,Helvetica,sans-serif;
+    color:#666;
+    margin:0;
+}
+ul,p,h1,h2,h3,h4,h5,h6,ol,dl,dd,li{
+    margin:0;
+    padding:0;
+    list-style:none;
+}
+img{vertical-align:bottom;}
+a{
+    color:#666;
+    text-decoration:none;
+}
+a:hover{
+    color:#FF0700;
+    text-decoration:none;
+}
+.flex{
+    display:flex;
+    display:-webkit-flex ;
+}
+.left{
+    float:left;
+}
+.right{
+    float:right;
+    margin-right:30px;
+}
+.hide{
+    display:none;
+}
+/*页面*/
+#page{
+    width:750px;
+}
+/****************头部页面******************************/
+header{
+    height:312px;
+    background-color:#eb6134;
+}
+.shopBar .back{
+    width:88px;
+    height:88px;
+    float:left;
+}
+.back_icon{
+    width:20px;
+    height:35px;
+    background: url('../img/icon.png') no-repeat -435px -180px;
+    margin:26px 0 0 33px;
+    float:left;
+}
+.shopBar .searchBox{
+    width:493px;
+    height:88px;
+    padding:15px 0;
+    position:relative;
+    float:left
+}
+.shopBar .searchBox input{
+    width:493px;
+    height:58px;
+    background:#fff;
+    border-radius:58px;
+    padding:0 15px 0 60px;
+    font-size:28px;
+}
+.search_icon{
+    width:30px;
+    height:30px;
+    background:url('../img/icon.png') -360px 0;
+    top:29px;
+    left:15px;
+    position:absolute
+}
+.shopBar .back+.searchBox,.shopBar .back+.searchBox input{
+    width:574px
+}
+/*.back{*/
+    /*width:88px;*/
+    /*height:88px;*/
+/*}*/
+.shopBar{
+    height:88px;
+    width:100%;
+}
+#logo{
+    margin:24px 0 0 32px;
+    width:160px;
+    height:160px;
+    border-radius:6px;
+    background-color:#fff;
+}
+#shopMessage{
+    margin:34px 0 0 26px;
+}
+.shop_name{
+    font-size: 30px;
+    color:#fff;
+    margin-right:24px;
+    text-align: center;
+}
+.airport{
+    font-size:24px;
+    color:#fff;
+    width:212px;
+    border-radius:10px;
+    background-color:rgb(255,57,57);
+    text-align:center;
+    line-height: 39.5px;
+}
+.shop_location{
+    margin:26px 0 20px 8px;
+}
+.shop_tel{
+    margin-left:4px;
+}
+.shop_location>span{
+    display:block;
+    width:18px;
+    height:24px;
+    background: #00cfd4 url('../image/local.png') no-repeat ;
+}
+.shop_tel>span{
+    display:block;
+    width:22px;
+    height:22px;
+    background:#00cfd4 url('../image/tel.png') no-repeat;
+}
+.local_tel{
+    color:rgb(255,255,255);
+    height:24px;
+    font-size:24px;
+    text-align:left;
+    line-height: 24px;
+    margin-left:10px;
+}
+/*************分页标签************/
+.tip{
+    width:100%;
+    height:78px;
+}
+div.tip span.active{
+    color:rgb(235,97,57);
+    font-size:28px;
+    border-bottom: 4px solid #eb6139;
+    border-radius: 2px;
+    padding-bottom: 5px;
+}
+div.tip span{
+    font-size:28px;
+    border-bottom: 4px solid #fff;
+}
+.tip_story{
+    width:50%;
+    height:78px;
+    text-align:center;
+    font-size:28px;
+    line-height: 78px;
+}
+.tip_pro{
+    width:50%;
+    height:78px;
+    text-align:center;
+    line-height:78px;
+}
+/*商品列表*/
+#shopping{
+    height:850px;
+    margin-bottom:100px;
+}
+#shoppingClassification{
+    width:160px;
+    margin-left:32px;
+    overflow-y: scroll;
+}
+#shoppingClassification li{
+    height:140px;
+    width:128px;
+    line-height: 140px;
+    font-size: 28px;
+    text-align: center;
+}
+.bold{
+    font-weight:bold;
+}
+.hot{
+    line-height:140px;
+
+}
+.hot_logo{
+    /*display:inline-block;*/
+    height:28px;
+    width:28px;
+    text-align:center;
+    /*background: #f5f url('../image/hotSelling.png') no-repeat;*/
+    background-color:#f5f;
+    margin:56px 0 0 36px;
+}
+.hot_sell{
+    line-height: 140px;
+    font-size: 28px;
+    text-align: center;
+    color:rgb(52,52,52);
+}
+.jump{
+    display:block;
+    width:128px;
+    height:140px;
+}
+#shoppingList{
+    margin-left:20px;
+    background-color: #abcdef;
+    width:100%;
+    overflow-y: scroll;
+}
+/*.blank2{*/
+    /*height:20px;*/
+    /*width:100%;*/
+/*}*/
+.leftBorder{
+    border-left:4px solid rgb(153,153,153);
+    border-radius:2px;
+    font-size:26px;
+    line-height: 26px;
+    padding-left:10px;
+    /*margin-top:80px;*/
+    margin-bottom: 14px;
+    font-weight: bold;
+}
+.food_img{
+    width:170px;
+    height:171px;
+    background-color: #fff;
+}
+.food_msg{
+    margin:16px 0 0 26px;
+    width:374px;
+}
+.food_name{
+    font-size: 30px;
+    color:rgb(52,52,52);
+    line-height: 30px;
+    margin-bottom: 22px;
+}
+div.priceNum:after{
+    content:"";
+    display:block;
+    clear:both;
+}
+.food_style{
+    font-size: 20px;
+    color:rgb(255,57,57);
+    border:1px solid rgb(255,57,57);
+    border-radius: 13px;
+    margin-left:20px;
+    text-align:right;
+    padding:3px;
+    line-height:30px;
+}
+.food_num{
+    font-size:24px;
+    color:rgb(102,102,102);
+    line-height: 24px;
+    margin-bottom: 28px;
+}
+.food_mark{
+    font-size: 30px;
+    color:rgb(235,95,57);
+    line-height:30px;
+}
+.food_price{
+    font-size: 38px;
+    color:rgb(235,95,57);
+    line-height:38px;
+}
+.food_order{
+    font-size:26px;
+    color:rgb(52,52,52);
+    line-height:26px;
+    width:50px;
+    text-align: center;
+    padding-top:10px;
+}
+.food_add{
+    width:45px;
+    height:45px;
+}
+.food_decrease{
+    width:45px;
+    height:45px;
+}
+.food_soldOut{
+    font-size:26px;
+    /*line-height: 26px;*/
+    color:rgb(102,102,102);
+}
+/*.blank{*/
+    /*height:60px;*/
+/*}*/
+.count{
+    margin-right: 30px;
+}
+.food_detail{
+    margin-bottom: 60px;
+}
+/*购物车*/
+#shoppingCar{
+    position: fixed;
+    bottom:0;
+    height:96px;
+}
+#car{
+    background-color:#4b4b4b;
+    position:relative;
+    width:545px;
+}
+#payment{
+    width:205px;
+    background-color:rgb(235,97,57);
+    text-align:center;
+    font-size: 32px;
+    color:rgba(255,255,255,0.98);
+    line-height:96px;
+}
+#myCar{
+    position:absolute;
+    left:32px;
+    bottom:0;
+    width:124px;
+    height:124px;
+    background:url('../image/shoppingcar.png') no-repeat;
+}
+#bill{
+    font-size:32px;
+    color:rgb(255,255,255);
+    line-height:96px;
+    margin-left:180px;
+}
+#bill>span{
+    font-size:48px;
+    color:rgb(255,255,255);
+    text-align: center;
+}
+#brandStory{
+    margin:32px 30px 0 30px;
+    font-size:26px;
+    color:rgb(102,102,102);
+    text-align:left;
+    line-height:44px;
+}
+#num {
+    float:right;
+    height:36px;
+    width:36px;
+    font-size:30px;
+    text-align:center;
+    line-height: 30px;
+    border-radius:50%;
+    color:#fff;
+    background-color:rgb(255,57,57);
+    margin-right:10px;
+}
+/**********遮罩层***************/
+#style{
+    width:640px;
+    height:466px;
+    border-radius:10px;
+    background-color: rgb(255,255,255);
+}
+.item{
+    margin-top:30px;
+    margin-bottom:60px;
+    font-size:30px;
+    color:rgb(52,52,52);
+    line-height:30px;
+    text-align:center;
+    font-weight: bold;
+}
+.item>span{
+    width:31px;
+    height:30px;
+    margin-right:26px;
+    background:url('../image/close.png') no-repeat;
+    float:right;
+}
+.chooseStyle{
+    font-size:28px;
+    color:rgb(52,52,52);
+    line-height:28px;
+    margin-left:24px;
+}
+div.styleList:after{
+    content:"";
+    display:block;
+    clear:both;
+}
+.styleList li{
+    margin:24px 0 0 24px;
+    width:149px;
+    height:55px;
+    color:rgb(102,102,102);
+    font-size:28px;
+    text-align:center;
+    float:left;
+    border-radius: 27px;
+    border:1px solid rgb(204,204,204);
+    line-height:55px;
+}
+.styleList li.active{
+    border:1px solid rgb(235,97,57);
+    background-color:rgb(255,214,202);
+    color:rgb(52,52,52);
+}
+div.choose:after{
+    content:"";
+    display:block;
+    clear:both;
+}
+.choose{
+    position:absolute;
+    bottom:0;
+    height:110px;
+    width:100%;
+}
+.bill{
+    font-size:32px;
+    color:rgb(235,97,57);
+    line-height:110px;
+    margin-left:34px;
+    float:left;
+}
+.bill>span{
+    font-size:48px;
+    color:rgb(235,97,57);
+    text-align: center;
+}
+.chooseWell{
+    margin:23px 24px 23px 0;
+    float:right;
+    font-size:28px;
+    color:rgb(255,255,255);
+    line-height:64px;
+    background-color:rgb(235,97,57);
+    border-radius:32px;
+    height:64px;
+    width:220px;
+    text-align:center;
+}
+#style{
+    position:absolute;
+    top:330px;
+    z-index: 1003;
+    left:50%;
+    margin-left:-320px;
+    background-color: #fff;
+}
+#bg{
+    position:absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background-color: #000;
+    z-index: 1001;
+    opacity: 0.4;
+}
+.font{
+    font-size:40px;
+    padding-top:10px;
+    width:750px;
+}

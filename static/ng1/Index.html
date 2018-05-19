@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Index</title>
+	<link rel="stylesheet" type="text/css" href="../css/foundation.css">
+	<style type="text/css">
+		.tx{width:150px;height: 50px;margin-bottom: 10px;margin-left: 5px;}
+	</style>
+</head>
+<body style="padding:10px;" ng-app="app">
+
+	<div ng-controller="MyCtrl">
+		<input type="text" ng-model="msg">
+		<h1>{{reverse()}}</h1>
+		<input type="text" ng-model="msg">
+		<h1>{{msg}}</h1>
+	</div>
+
+	<div ng-controller="MyCtrl2">
+		<input type="text" ng-model="uname">
+		<h1>{{2*6}}</h1>
+		<div ng-bind="uname">
+			<div class="{{uname}}">{{uname}}</div>
+		</div>
+	</div>
+
+
+	<div ng-controller="MyCtrl4">
+		<h1>{{data.msg}}</h1>
+		<h1>{{realname}}</h1>
+		<h1>{{http}}</h1>
+		<h1>{{uname}}</h1>
+	</div>
+	<h1>--Services的应用--</h1>
+	<div ng-controller="FCtrl">	
+		<h2>{{data2.msg}}</h2>
+		<input type="text" ng-model="data2.shopcart['0']">
+	</div>
+	<div ng-controller="Shopping">	
+		<input type="text" class="formcontrol" ng-model="goods">
+		<span class="input-group-btn">
+			<div class="button" ng-click="buy()">添加</div>
+		</span>
+		
+		<h1 ng-if="shopcart.length>0">购物列表</h1>
+		<ul class="list-group">
+			<li ng-repeat="item in shopcart track by $index">{{item}}
+				<a ng-click="shopcart.splice($index,1)">删除</a></li>
+		</ul>
+	</div>
+	<h1>--常用指令--</h1>
+	<div ng-controller="UserCtrl">
+		<form name="f" ng-submit="register(user)">
+			<fieldset>
+				<legend>基本信息</legend>
+				<!-- <img ng-src="{{user.icon}}" ng-show="user.isShowImg"> -->
+				<!-- 应用.tx 这个css -->
+				<img ng-src="{{user.icon}}" ng-class="{'tx':user.showicon}">
+				<div>
+					<input type="text" ng-model="user.uname" placeholder="用户名" required>
+					<input type="password" ng-model="user.pwd" placeholder="密码" required>
+					职位：<select>
+						<option value="--">请选择</option>
+						<option value="1" ng-selected="user.zw"=='1'>JAVA工程师</option>
+						<option value="2" ng-selected="user.zw"=='2'>.NET工程师</option>
+					</select>
+					性别：
+					<input type="radio" name="sex" ng-checked="user.sex=='0'">男
+					<input type="radio" name="sex"ng-checked="user.sex=='1'">女
+				</div>
+			</fieldset>
+			<fieldset>
+				<legend>爱好</legend>
+				<div>
+					<input type="checkbox" name="ai" ng-checked="isAihao(0)">足球
+					<input type="checkbox" name="ai" ng-checked="isAihao(1)">篮球
+					<input type="checkbox" name="ai" ng-checked="isAihao(2)">排球
+				</div>
+			</fieldset>
+			<button type="submit" class="button expand" ng-disabled="f.$invalid">提交</button>
+			<div class="alert-box" ng-if="user.errormsg.length>0">{{user.errormsg}}</div>
+		</form>
+	</div>
+
+	<div ng-controller="AddressCtrl">
+		<h1>地址管理</h1>
+		<ul class="ui-list ui-list-link ui-list-text ui-list-active">
+			<li class="ui-border-t"  ng-repeat= "a in list" ng-class="{'selected':$last}">
+			<!-- <li class="ui-border-t"  ng-repeat= "a in list" ng-if="$first"> -->
+				<h4>{{$index+1 + '.' + a.address + $first + $last}}</h4>
+			</li>
+		</ul>
+	</div>	
+</body>
+<script type="text/javascript" src="js/Angular1.5.5.js"></script>
+<script type="text/javascript" src="js/index.js"></script>
+</html>

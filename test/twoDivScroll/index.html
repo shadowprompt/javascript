@@ -1,0 +1,111 @@
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>CodePen - Bootstrap's Affix and ScrollSpy plugins</title>
+    <style>/* Copyright 2014 Evernote Corporation. All rights reserved. */
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+    body {
+        font-family: 'Open Sans', sans-serif;
+    }
+
+    /* Navigation */
+    nav {
+        width: 160px;
+        height: 200px;
+        position: fixed;
+        top: 0;
+        background: #1ABC9C;
+        overflow: scroll;
+    }
+    nav ul {
+        padding: 20px;
+        margin: 0 auto;
+        list-style: none;
+        text-align: center;
+    }
+    nav ul li {
+        display: inline-block;
+        margin: 0 10px;
+        height: 40px;
+    }
+    nav ul li a {
+        padding: 10px 0;
+        color: #fff;
+        font-size: 1rem;
+        text-decoration: none;
+        font-weight: bold;
+        transition: all 0.2s ease;
+    }
+    nav ul li a:hover {
+        color: #34495E;
+    }
+    .active {
+        background-color: red;
+    }
+
+    /* Headings */
+    h1 {
+        font-size: 5rem;
+        color: #34495E;
+    }
+
+    /* Sections */
+    .sections{
+        height: 500px;
+        overflow: scroll;
+    }
+    section {
+        width: 100%;
+        height: 400px;
+        padding: 50px;
+        background: #fff;
+        border-bottom: 1px solid #ccc;
+        text-align: center;
+
+    }
+    section:nth-child(even) {
+        background: #ecf0f1;
+    }
+    section:nth-child(odd) {
+        background: #bdc3c7;
+    }
+    .sections section:first-child {
+        /* margin-top: 60px; */
+    }
+    section.active {
+    }
+    footer {
+        height: 500px;
+        background: #34495e;
+    }
+    </style>
+</head>
+<title>两个div联动</title>
+<body>
+ <nav>
+  <ul>
+    <li><a href="#1">First</a></li>
+    <li><a href="#2">Second</a></li>
+    <li><a href="#3">Third</a></li>
+    <li><a href="#4">Fourth</a></li>
+    <li><a href="#5">Fifth</a></li>
+  </ul>
+</nav>
+
+<div class="sections">
+  <section id="1"><h1>First</h1></section>
+  <section id="2"><h1>Second</h1></section>
+  <section id="3"><h1>Third</h1></section>
+  <section id="4"><h1>Fourth</h1></section>
+  <section id="5"><h1>Fifth</h1></section>
+</div>
+
+<script src="../../static/jquery.min.js"></script>
+<script src="index.js"></script>
+</body>
+</html>

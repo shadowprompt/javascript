@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>新浪首页</title>
+	<link rel="stylesheet" href="index.css">
+</head>
+<body>
+	<nav>
+		<ul class="beLeft">
+			<li><a href="#">设为首页</a></li>
+			<li><a href="#">手机新浪网</a></li>
+			<li><a href="#">移动客户端<span class="arrow"></span></a>
+				<ul>
+					<li><a href="#">新浪微博</a></li>
+					<li><a href="#">新浪新闻</a></li>
+				</ul>
+			</li>
+			<li class="noFloat"></li>
+		</ul>
+		<ul class="beRight">
+			<li><a href="#">登录</a>
+				<div class="loginDiv">
+					<div class="cha">X	</div>
+					<div class="left">
+						<div class="top">用微博客户端扫描安全登录</div>
+						<div class="bottom"><img src="gen.png"></div>
+					</div>
+					<div class="right">
+						<div class="top">新浪微博、博客、邮箱帐号，请直接登录</div>
+						<div class="bottom">
+							<label class="inline">用户名：</label>
+							<div id="username"><input type="text" size="15"></div>
+							<label class="inline">用户名：</label>
+							<div id="password"><input type="text" size="15"></div>
+						</div>
+					</div>
+				</div>
+			</li>
+
+			<li><a href="#">微博</a></li>
+			<li><a href="#">博客<span class="arrow"></span></a>
+				<ul>
+					<li><a href="#">新浪微博</a></li>
+					<li><a href="#">新浪新闻</a></li>
+				</ul>
+			</li>
+			<li><a href="#">邮箱</a></li>
+			<li><a href="#">网址导航</a></li>
+			<li class="noFloat"></li>
+		</ul>
+	</nav>
+	<content></content>
+</body>
+	<script type="text/javascript" src="../libs/jquery.min.js"></script>
+	<script type="text/javascript" src="index.js"></script>
+</html>

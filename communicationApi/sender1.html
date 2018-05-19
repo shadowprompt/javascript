@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>跨域Sender</title>
+	<script>
+	//弹出一个新窗口
+	var domain = 'http://localhost:8090';
+	var myPopup = window.open(domain 
+	            + '/Front/communicationApi/listener.html','myWindow');
+	var notification;
+	//周期性的发送消息
+	setInterval(function(){
+		var message = 'Hello!  The time is: ' + (new Date().getTime());
+		console.log('blog.local:  sending message:  ' + message);
+	        //send the message and target URI
+		myPopup.postMessage(message,domain);
+	},15000);
+
+	var popNotice = function(msg){
+		if(Notification.permission == "granted"){
+			notification = new Notification("Hi !",{
+				body: msg
+			})
+
+			notification.onclick = function(){
+				notification.close();
+			}
+		}
+	};
+	//监听消息反馈
+	window.addEventListener('message',function(event) {
+		if(event.origin !== 'http://localhost:8090') return;
+		if(window.Notification){
+			if(Notification.permission =="granted"){
+				popNotice(event.data);
+			}else if(Notification.permission !="denied"){
+				Notification.requestPermission(function(permission){
+					popNotice(event.data);
+				});
+			}
+		}else{
+			alert("浏览器不支持Notification");
+		}
+		console.log('received response:  ',event.data);
+	},false);
+	</script>
+</head>
+<body>
+</body>
+</html>

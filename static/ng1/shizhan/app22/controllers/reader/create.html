@@ -1,0 +1,40 @@
+<form name="form" ng-submit="vm.submit(vm.form)" novalidate="novalidate">
+	<div>
+		<label for="_email">邮箱</label>
+		<input id="_email" type="email" name="email" ng-required="true" ng-model="vm.form.email">
+		<ul ng-if="form.email.$dirty && form.email.$invalid">
+			<li ng-if="form.email.$error.email">无效的邮箱格式</li>
+			<li ng-if="form.email.$error.required">此项为必填项</li>
+		</ul>
+	</div>
+	<div>
+		<label for="_nickname">昵称</label>
+		<input id="_nickname" type="text" ng-model="vm.form.nickname">
+	</div>
+
+	<div>
+		<label for="_password">密码</label>
+		<input id="_password" type="password">
+	</div>
+	<div>
+		<label for="_retypedpassword">确认密码</label>
+		<input id="_retypedpassword" type="password">
+	</div>
+
+	<div>
+		<label for="_captcha">图形验证码</label>
+		<input id="_captcha" type="text">
+		<img src="" alt="图形验证码" />
+	</div>
+	<div>
+		<input id="_accepted" type="checkbox" />
+		<label for="_captcha">我已阅读并同意
+			<a href="">用户服务协议</a>
+		</label>
+	</div>
+	<div>
+		<button type="submit">
+			提交
+		</button>
+	</div>
+</form>

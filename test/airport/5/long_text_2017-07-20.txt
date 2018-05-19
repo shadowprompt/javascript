@@ -1,0 +1,322 @@
+{
+    "success": true,
+    "message": "操作成功",
+    "data": {
+        "left_data": [
+            {
+                "create_time": 1500276056000,
+                "ccid": "86191472-a157-4270-b4d0-ce2a431687a7",
+                "ccname": "正餐系列",
+                "cust_cate_sort": 0
+            },
+            {
+                "create_time": 1500276056000,
+                "ccid": "ec1a6e0e-d3f3-47e6-b56a-2accc35b404b",
+                "ccname": "早餐系列",
+                "cust_cate_sort": 0
+            }
+        ],
+        "right_data": [
+            {
+                "ccid": "86191472-a157-4270-b4d0-ce2a431687a7",
+                "cc_list": [
+                    {
+                        "virtualgoodsmark": "2",
+                        "ccid": "86191472-a157-4270-b4d0-ce2a431687a7",
+                        "sku_total": 2,
+                        "spection_list": [
+                            {
+                                "gs_value_list": [
+                                    {
+                                        "gsid": "289a1649f8899ff4e402ee4f23c9",
+                                        "sgsoid": "d4e1424a-6ae9-11e7-abd9-6c92bf4705cc",
+                                        "gsoptions": "中辣",
+                                        "gsoid": "75c485cff8d79ec6965bb8baf771",
+                                        "gskuid": "55843420"
+                                    },
+                                    {
+                                        "gsid": "289a1649f8899ff4e402ee4f23c9",
+                                        "sgsoid": "bd15e5da-6ae9-11e7-abd9-6c92bf4705cc",
+                                        "gsoptions": "重辣",
+                                        "gsoid": "a7265f44d9e0bf381af18ff15470",
+                                        "gskuid": "57306519"
+                                    }
+                                ],
+                                "gsid": "289a1649f8899ff4e402ee4f23c9",
+                                "gsname": "口味"
+                            }
+                        ],
+                        "retailprice": 58,
+                        "goodsname": "山城毛血旺9",
+                        "gmainpic": "",
+                        "biid": "e4901151-136f-2c92-5ef3-4864b38a4363",
+                        "giid": "6efb2714-7d50-46e5-b21d-4d36041f9bf5",
+                        "multi_specification": "1"
+                    },
+                    {
+                        "virtualgoodsmark": "2",
+                        "ccid": "86191472-a157-4270-b4d0-ce2a431687a7",
+                        "sku_total": 1,
+                        "spection_list": "",
+                        "retailprice": 58,
+                        "goodsname": "山城毛血旺8",
+                        "gmainpic": "",
+                        "biid": "e4901151-136f-2c92-5ef3-4864b38a4363",
+                        "giid": "b6bbc521-949f-0752-d818-0d9b4b8009b1",
+                        "multi_specification": "0"
+                    },
+                    {
+                        "virtualgoodsmark": "2",
+                        "ccid": "86191472-a157-4270-b4d0-ce2a431687a7",
+                        "sku_total": 1,
+                        "spection_list": "",
+                        "retailprice": 18,
+                        "goodsname": "炒饭",
+                        "gmainpic": "",
+                        "biid": "e4901151-136f-2c92-5ef3-4864b38a4363",
+                        "giid": "b72a41dd-867f-69a0-5718-90696f7e5a62",
+                        "multi_specification": "0"
+                    },
+                    {
+                        "virtualgoodsmark": "2",
+                        "ccid": "86191472-a157-4270-b4d0-ce2a431687a7",
+                        "sku_total": 3,
+                        "spection_list": [
+                            {
+                                "gs_value_list": [
+                                    {
+                                        "gsid": "1cc6f28355c0b12df886a2c13376",
+                                        "sgsoid": "b5ac6174-6ae9-11e7-abd9-6c92bf4705cc",
+                                        "gsoptions": "微辣",
+                                        "gsoid": "774e8aec078c8f485188e4d5ba99",
+                                        "gskuid": "90406697"
+                                    },
+                                    {
+                                        "gsid": "1cc6f28355c0b12df886a2c13376",
+                                        "sgsoid": "d4e1424a-6ae9-11e7-abd9-6c92bf4705cc",
+                                        "gsoptions": "中辣",
+                                        "gsoid": "a3bd722dc9f2bc53f2087948aa76",
+                                        "gskuid": "92918419"
+                                    },
+                                    {
+                                        "gsid": "1cc6f28355c0b12df886a2c13376",
+                                        "sgsoid": "bd15e5da-6ae9-11e7-abd9-6c92bf4705cc",
+                                        "gsoptions": "重辣",
+                                        "gsoid": "ae5102c8213dab7771247fef624d",
+                                        "gskuid": "9158349"
+                                    }
+                                ],
+                                "gsid": "1cc6f28355c0b12df886a2c13376",
+                                "gsname": "口味"
+                            }
+                        ],
+                        "retailprice": 12,
+                        "goodsname": "山城毛血旺",
+                        "gmainpic": "",
+                        "biid": "e4901151-136f-2c92-5ef3-4864b38a4363",
+                        "giid": "c34a0a76-6c9e-4a2b-a898-a76b814d3c71",
+                        "multi_specification": "1"
+                    }
+                ],
+                "ccname": "正餐系列"
+            },
+            {
+                "ccid": "ec1a6e0e-d3f3-47e6-b56a-2accc35b404b",
+                "cc_list": [
+                    {
+                        "virtualgoodsmark": "2",
+                        "ccid": "ec1a6e0e-d3f3-47e6-b56a-2accc35b404b",
+                        "sku_total": 1,
+                        "spection_list": "",
+                        "retailprice": 58,
+                        "goodsname": "山城毛血旺3",
+                        "gmainpic": "",
+                        "biid": "e4901151-136f-2c92-5ef3-4864b38a4363",
+                        "giid": "71b1d2d9-a5d8-de7f-6d1b-bbce4c8a6e67",
+                        "multi_specification": "0"
+                    },
+                    {
+                        "virtualgoodsmark": "2",
+                        "ccid": "ec1a6e0e-d3f3-47e6-b56a-2accc35b404b",
+                        "sku_total": 1,
+                        "spection_list": "",
+                        "retailprice": 58,
+                        "goodsname": "山城毛血旺10",
+                        "gmainpic": "",
+                        "biid": "e4901151-136f-2c92-5ef3-4864b38a4363",
+                        "giid": "72503979-6ab8-78c6-7349-e65bb796277f",
+                        "multi_specification": "0"
+                    },
+                    {
+                        "virtualgoodsmark": "2",
+                        "ccid": "ec1a6e0e-d3f3-47e6-b56a-2accc35b404b",
+                        "sku_total": 1,
+                        "spection_list": "",
+                        "retailprice": 58,
+                        "goodsname": "山城毛血旺5",
+                        "gmainpic": "",
+                        "biid": "e4901151-136f-2c92-5ef3-4864b38a4363",
+                        "giid": "76d4c302-170c-90ea-c0d8-204f22a7fa47",
+                        "multi_specification": "0"
+                    },
+                    {
+                        "virtualgoodsmark": "2",
+                        "ccid": "ec1a6e0e-d3f3-47e6-b56a-2accc35b404b",
+                        "sku_total": 3,
+                        "spection_list": [
+                            {
+                                "gs_value_list": [
+                                    {
+                                        "gsid": "3987af4b8c5c8ba5ba0970cbb029",
+                                        "sgsoid": "b5ac6174-6ae9-11e7-abd9-6c92bf4705cc",
+                                        "gsoptions": "微辣",
+                                        "gsoid": "186682526ab385c8f6f2dd1e8dfb",
+                                        "gskuid": "36028570"
+                                    },
+                                    {
+                                        "gsid": "3987af4b8c5c8ba5ba0970cbb029",
+                                        "sgsoid": "d4e1424a-6ae9-11e7-abd9-6c92bf4705cc",
+                                        "gsoptions": "中辣",
+                                        "gsoid": "cd020346cf009cf14a94725c7994",
+                                        "gskuid": "41994855"
+                                    },
+                                    {
+                                        "gsid": "3987af4b8c5c8ba5ba0970cbb029",
+                                        "sgsoid": "bd15e5da-6ae9-11e7-abd9-6c92bf4705cc",
+                                        "gsoptions": "重辣",
+                                        "gsoid": "db9fec6ff0599377da505c434569",
+                                        "gskuid": "38318938"
+                                    }
+                                ],
+                                "gsid": "3987af4b8c5c8ba5ba0970cbb029",
+                                "gsname": "口味"
+                            }
+                        ],
+                        "retailprice": 58,
+                        "goodsname": "山城毛血旺1",
+                        "gmainpic": "",
+                        "biid": "e4901151-136f-2c92-5ef3-4864b38a4363",
+                        "giid": "84056463-01cf-1f9a-234b-7ca6def2c3dd",
+                        "multi_specification": "1"
+                    },
+                    {
+                        "virtualgoodsmark": "2",
+                        "ccid": "ec1a6e0e-d3f3-47e6-b56a-2accc35b404b",
+                        "sku_total": 1,
+                        "spection_list": "",
+                        "retailprice": 58,
+                        "goodsname": "58",
+                        "gmainpic": "",
+                        "biid": "e4901151-136f-2c92-5ef3-4864b38a4363",
+                        "giid": "8527e171-51eb-30cc-2488-9d5dafd81d7c",
+                        "multi_specification": "0"
+                    },
+                    {
+                        "virtualgoodsmark": "2",
+                        "ccid": "ec1a6e0e-d3f3-47e6-b56a-2accc35b404b",
+                        "sku_total": 2,
+                        "spection_list": [
+                            {
+                                "gs_value_list": [
+                                    {
+                                        "gsid": "2bf7d94846c0aab6da70a92f04a5",
+                                        "sgsoid": "bd15e5da-6ae9-11e7-abd9-6c92bf4705cc",
+                                        "gsoptions": "重辣",
+                                        "gsoid": "18e9dc023ffc9bbceb46ea355b44",
+                                        "gskuid": "8723984"
+                                    },
+                                    {
+                                        "gsid": "2bf7d94846c0aab6da70a92f04a5",
+                                        "sgsoid": "b5ac6174-6ae9-11e7-abd9-6c92bf4705cc",
+                                        "gsoptions": "微辣",
+                                        "gsoid": "bbb4a1940068a9f4deba393a47cf",
+                                        "gskuid": "85540495"
+                                    }
+                                ],
+                                "gsid": "2bf7d94846c0aab6da70a92f04a5",
+                                "gsname": "口味"
+                            }
+                        ],
+                        "retailprice": 58,
+                        "goodsname": "山城毛血旺11",
+                        "gmainpic": "",
+                        "biid": "e4901151-136f-2c92-5ef3-4864b38a4363",
+                        "giid": "8670c31c-075d-8382-20c0-8b8c6e97304a",
+                        "multi_specification": "1"
+                    },
+                    {
+                        "virtualgoodsmark": "2",
+                        "ccid": "ec1a6e0e-d3f3-47e6-b56a-2accc35b404b",
+                        "sku_total": 1,
+                        "spection_list": "",
+                        "retailprice": 58,
+                        "goodsname": "山城毛血旺2",
+                        "gmainpic": "",
+                        "biid": "e4901151-136f-2c92-5ef3-4864b38a4363",
+                        "giid": "9bbe1d9f-1979-b1d2-0bea-4b5e134680bc",
+                        "multi_specification": "0"
+                    },
+                    {
+                        "virtualgoodsmark": "2",
+                        "ccid": "ec1a6e0e-d3f3-47e6-b56a-2accc35b404b",
+                        "sku_total": 1,
+                        "spection_list": "",
+                        "retailprice": 58,
+                        "goodsname": "山城毛血旺6",
+                        "gmainpic": "",
+                        "biid": "e4901151-136f-2c92-5ef3-4864b38a4363",
+                        "giid": "af02b364-8b39-871a-8903-ba37b6b2e658",
+                        "multi_specification": "0"
+                    },
+                    {
+                        "virtualgoodsmark": "2",
+                        "ccid": "ec1a6e0e-d3f3-47e6-b56a-2accc35b404b",
+                        "sku_total": 1,
+                        "spection_list": "",
+                        "retailprice": 58,
+                        "goodsname": "山城毛血旺4",
+                        "gmainpic": "",
+                        "biid": "e4901151-136f-2c92-5ef3-4864b38a4363",
+                        "giid": "d81a4ab0-52a1-36c2-4de1-d62466061dbe",
+                        "multi_specification": "0"
+                    },
+                    {
+                        "virtualgoodsmark": "2",
+                        "ccid": "ec1a6e0e-d3f3-47e6-b56a-2accc35b404b",
+                        "sku_total": 2,
+                        "spection_list": [
+                            {
+                                "gs_value_list": [
+                                    {
+                                        "gsid": "abfafd58116d94cd733af4c17e28",
+                                        "sgsoid": "bd15e5da-6ae9-11e7-abd9-6c92bf4705cc",
+                                        "gsoptions": "重辣",
+                                        "gsoid": "c29d742c63b1a86f3e6887c5fe68",
+                                        "gskuid": "33479235"
+                                    },
+                                    {
+                                        "gsid": "abfafd58116d94cd733af4c17e28",
+                                        "sgsoid": "d4e1424a-6ae9-11e7-abd9-6c92bf4705cc",
+                                        "gsoptions": "中辣",
+                                        "gsoid": "e64f6068ef9a88a5037c340e089b",
+                                        "gskuid": "32063914"
+                                    }
+                                ],
+                                "gsid": "abfafd58116d94cd733af4c17e28",
+                                "gsname": "口味"
+                            }
+                        ],
+                        "retailprice": 58,
+                        "goodsname": "山城毛血旺7",
+                        "gmainpic": "",
+                        "biid": "e4901151-136f-2c92-5ef3-4864b38a4363",
+                        "giid": "f1019cfa-a33a-2872-5d32-1976dfacd2af",
+                        "multi_specification": "1"
+                    }
+                ],
+                "ccname": "早餐系列"
+            }
+        ]
+    },
+    "totalCount": 0
+}

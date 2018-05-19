@@ -1,0 +1,80 @@
+<!doctype html>
+<html ng-app="myApp">
+<head>
+  <title>ngXHR</title>
+  <script src="js/Angular1.5.5.js"></script>
+  <script src="js/xml2json.js"></script>
+</head>
+<body>
+
+  <div ng-controller="ServiceController">
+    {{d}}
+  </div>
+  
+  <script>
+    angular.module('myApp', [])
+    .factory('xmlParser', function(){
+      var x2js = new X2JS();
+      return {
+        xml2json: x2js.xml2json,
+        json2xml: x2js.json2xml_str
+      };
+    })
+    .factory('jsonData', function($http, xmlParser) {
+      var c = $http.get('daozhao2.xml',{
+        transformResponse: function(data){
+          return xmlParser.xml2json(data);
+        } 
+      });
+      return c;
+    })
+    .controller('ServiceController', function($scope, jsonData, Interceptor) {
+        $scope.$on('page:notFound', function(err, msg){
+          // console.log(err);
+          console.log(msg);
+        })
+    })
+ 
+    .config(function($httpProvider){
+      $httpProvider.interceptors.push('Interceptor');
+    })
+    .factory('Interceptor', function($q, $rootScope){
+      var interceptor = {
+        response: function(resp){
+          console.log(resp);
+          if(resp.config.url == 'daozhao.xml'){
+            //假设API服务器返回的数据格式如下：
+            //{ token: "AUTH_TOKEN"}
+            //Auth.setToken(resp.data.token);
+          }
+          return resp;
+        },
+        responseError: function(rejection){
+          //错误处理
+          switch(rejection.status){
+          case 401:
+            if(rejection.config.url!= 'daozhao.xml')
+              //如果当前不是在登录界面
+            $rootScope.$broadcast('auth:loginRequired');
+            break;
+          case 403:
+            $rootScope.$broadcast('auth:forbindden');
+            break;
+          case 404:
+            $rootScope.$broadcast('page:notFound','页面找不到');
+            break;
+          case 500:
+            $rootScope.$broadcast('server:error');
+            break;
+          }
+          return $q.reject(rejection);
+        },
+      };
+      return interceptor;
+    })
+
+
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+    <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+</head>
+    <style type="text/css" media="screen">
+        header {
+            position: absolute;
+            border: 1px solid red;
+            width: 100%;
+        }
+        .main{
+            position: relative;
+            padding-top: 20px;
+        }
+        article{
+            border: 1px solid blue;
+        }
+        aside{
+            display: block;
+            border: 1px solid yellow;
+        }
+        .nav{
+            position: fixed;
+        }
+        .content{
+            float: right;
+            width: 70%;
+            height: 475px;
+            overflow-y: scroll;
+        }
+        ul li{
+            height: 200px;
+        }
+        li.active{
+            background: red;
+        }
+        .item{
+            border: 1px solid red;
+            margin: 10px;
+        }
+        .item .item-top{
+            height: 20px;
+        }
+        .item .item-main{
+            height: 300px;
+        }
+        ul{
+            border: 1px solid #000;
+            height: 470px;
+            overflow-y: scroll;
+        }
+        .clear{
+            clear: both;
+        }
+    </style>
+<body>
+    <div class="page">
+        <header class="top">头部</header>
+        <div class="main">
+            <aside id="myScrollspy">
+                <ul class="nav" id="myNav">
+                    <li><a href="#first">第一个</a></li>
+                    <li><a href="#second">第二个</a></li>
+                    <li><a href="#third">第三个</a></li>
+                    <li><a href="#fourth">第四个</a></li>
+                    <li><a href="#fifth">第五个</a></li>
+                </ul>
+            </aside>
+            <article class="content"  data-spy="scroll" data-target="#myScrollspy" data-offset="23">
+                <div class="item" id="first">
+                    <div class="item-top">1</div>
+                    <div class="item-main">内容1</div>
+                </div>
+                <div class="item" id="second">
+                    <div class="item-top">2</div>
+                    <div class="item-main">内容2</div>
+                </div>
+                <div class="item" id="third">
+                    <div class="item-top">3</div>
+                    <div class="item-main">内容3</div>
+                </div>
+                <div class="item" id="fourth">
+                    <div class="item-top">4</div>
+                    <div class="item-main">内容4</div>
+                </div>
+                <div class="item" id="fifth">
+                    <div class="item-top">5</div>
+                    <div class="item-main">内容5</div>
+                </div>
+            </article>
+            <div class="clear"></div>
+        </div>
+    </div>
+    <script type="text/javascript" src="js/jquery-3.2.1.js"></script>
+    <script type="text/javascript" src="js/bootstrap.js"></script>
+    <script type="text/javascript" src="index.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,135 @@
+<!doctype html>
+<html ng-app="myApp">
+<head>
+  <title>ngService</title>
+  <script src="js/Angular1.5.5.js"></script>
+  <style>
+    .odd {
+    background-color: blue;
+    }
+    .even {
+    background-color: red;
+    }
+
+    input.ng-invalid {
+      border: 1px solid red;
+    }
+    input.ng-valid {
+     border: 1px solid green;
+    }
+    .red {
+     background-color: red;
+    }
+  </style>
+</head>
+<body>
+
+  <div ng-controller="ServiceController">
+    <label for="username">
+    Type in a GitHub username
+    </label>
+    <input type="text" ng-model="username" placeholder="Enter a GitHub username" />
+    <ul>
+      <li ng-repeat="event in events">
+      <!--
+      event.actor and event.repo are returned
+      by the github API. To view the raw
+      API, uncomment the next line:
+      -->
+      <!-- {{ event | json }} -->
+      {{ event.actor.login }} {{ event.repo.name }}
+      </li>
+    </ul>
+  </div>
+  <hr>
+  <div ng-controller="githubSerCtrl">哈哈</div>
+  <script>
+    angular.module('myApp', [])
+    .factory('githubService', function($http) {
+      var githubUrl = 'https://api.github.com';
+      var runUserRequest = function(username, path) {
+        // 从使用JSONP调用Github API的$http服务中返回promise
+        return $http({
+          method: 'JSONP',
+          url: githubUrl + '/users/' +  username + '/' +  path + '?callback=JSON_CALLBACK'
+        });
+      };
+      // 返回带有一个events函数的服务对象
+      return {
+        events: function(username) {
+          return runUserRequest(username, 'events');
+        },
+        setUsername: function(username) {
+          githubUsername = username;
+        }
+      };
+    })
+    .controller('ServiceController', function($scope, githubService) {
+      // 注意username属性的变化
+      // 如果有变化就运行该函数
+      $scope.$watch('username', function(newUsername) {
+        // 从使用JSONP调用Github API的$http服务中返回promise
+        githubService.events(newUsername)
+        .success(function(data, status, headers) {
+          // success函数在数据中封装响应\
+          // 因此我们需要调用data.data来获取原始数据
+          $scope.events = data.data;
+        });
+        $scope.setUsername = githubService.setUsername;
+      });
+    })
+
+    .provider('githubSer', function(){  //provider此处不用注入$http
+     var githubUrl='https://github.com';
+     this.setGithubUrl = function(url){
+        if(url) {
+          githubUrl = url;
+        }
+      };
+      this.method = 'JSONP';
+
+      this.$get = function($http){ //此处要引入$http
+        var self = this;
+        var ser = {
+          getHttp: function(){
+            return $http({method: self.method, url: githubUrl });
+          },
+          cc: function(){
+            return "cc";
+          }
+        };
+        return ser;      
+      };
+    })   
+    .constant("apiKey", "4re3") //constant是常量，可以注入到配置函数，而value是值，不能注入
+    .config(function(githubSerProvider, apiKey, $provide){ //更换githubUrl
+      githubSerProvider.setGithubUrl("http://www.baidu.com");
+      console.log(apiKey);
+      $provide.decorator('githubService', githubDecorator);
+    })
+    .controller('githubSerCtrl',function($scope, githubSer, apiKey){
+      //获取的都是$get里面的方法
+      console.log(githubSer.cc);
+      console.log(githubSer.getHttp());
+      console.log(apiKey);
+    })
+    var githubDecorator = function($delegate, $log){
+      var events = function(path){
+        var startedAt = new Date();
+        var eve = $delegate.events(path);
+        //事件是一个promise 
+        eve.finally(function(){
+          $log.info("Fetching events took " + (new Date() - startedAt) + "ms");
+        });
+        return eve;
+      };
+      return {
+        events: events
+      };
+    };
+
+
+  </script>
+
+</body>
+</html>

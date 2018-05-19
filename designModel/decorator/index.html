@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>装饰器模式</title>
+</head>
+
+<body>
+    <label id='tel_label'>电话号码</label>
+    <input type="text" id="tel_input">
+    <p id="tel_warn_text" style="display: none">请填写电话号码</p>
+    <label>姓名</label>
+    <input type="text" id="name_input">
+    <p id="name_warn_text" style="display: none">请填写姓名</p>
+    <script>
+        var telInput = document.getElementById('tel_input');
+        var telWarnText = document.getElementById('tel_warn_text');
+        telInput.onclick = function() {
+            telWarnText.style.display = "block";
+        }
+    </script>
+
+    <script>
+        var decorator = function(id, fn) {
+            var input = document.getElementById(id);
+            if (typeof input.onclick == 'function') {
+                var oldClick = input.onclick;
+                input.onclick = function() {
+                    oldClick();
+                    fn();
+                }
+            } else {
+                input.onclick = fn;
+            }
+        }
+
+        decorator('tel_input', function() {
+            document.getElementById('tel_label').style.color = 'red';
+        })
+    </script>
+</body>
+
+</html>

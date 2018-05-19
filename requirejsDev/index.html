@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+    <title>Requirejs</title>
+    <script data-main="scripts/main" src="scripts/require.js"></script>
+    <style type="text/css" media="screen">
+        html {
+            font-size: 50px;
+            height: 100%;
+            touch-action: none;
+            -webkit-touch-action: none;
+            -ms-touch-action: none;
+        }
+        
+        html body {
+            height: 100%;
+            margin: 0;
+        }
+        
+        html body .app-content #wrapper {
+            position: absolute;
+            z-index: 1;
+            top: 0;
+            bottom: 1px;
+            left: 0;
+            width: 100%;
+            background: #ccc;
+            overflow: hidden;
+        }
+        
+        html body .app-content #wrapper #pullDown,
+        html body .app-content #wrapper #pullUp {
+            height: 40px;
+            line-height: 40px;
+            text-align: center;
+        }
+        
+        html body .app-content #wrapper #pullDown .pullDownIcon,
+        html body .app-content #wrapper #pullUp .pullDownIcon {
+            display: inline-block;
+            width: 38px;
+            height: 45px;
+            background-size: 100%;
+        }
+        
+        html body .app-content #wrapper #pullDown .pullDownLabel,
+        html body .app-content #wrapper #pullUp .pullDownLabel {
+            display: inline-block;
+        }
+        
+        html body .app-content #wrapper .loading {
+            background: red;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="app-content">
+        <div id="wrapper">
+            <div id="scroller">
+                <div id="pullDown" class="">
+                    <div class="pullDownIcon"></div>
+                    <div class="pullDownLabel"></div>
+                </div>
+                <div id="scroller-container">
+                    <div class="msg-lists">
+                        <!--渲染数据-->
+                    </div>
+                    <ul class="container"></ul>
+                </div>
+
+                <div id="pullUp" class="">
+                    <div class="pullUpIcon"></div>
+                    <div class="pullUpLabel"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/template" id="msgListsTemplate">
+        <%if(result){
+                _.each(result, function(item){%>
+
+            <div class="msgList">
+                <div class="msgList-top">
+                    <%=item.name%>
+                </div>
+                <div class="msgList-main">
+                    <%=item.body%>
+                </div>
+                <div class="msgList-bottom">
+                    <%=item.date%>
+                </div>
+            </div>
+
+            <%})
+        }%>
+    </script>
+</body>
+
+</html>

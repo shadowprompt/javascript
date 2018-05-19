@@ -1,0 +1,253 @@
+/*通用*/
+*{
+    box-sizing: border-box;
+}
+body{
+    font:12px "microsoft yahei",Arial,Helvetica,sans-serif;
+    color:#666;
+    margin:0;
+    background-color:rgb(245,245,245)
+}
+ul,p,h1,h2,h3,h4,h5,h6,ol,dl,dd,li{
+    margin:0;
+    padding:0;
+    list-style:none;
+}
+img{vertical-align:bottom;}
+a{
+    color:#666;
+    text-decoration:none;
+}
+a:hover{
+    color:#FF0700;
+    text-decoration:underline;
+}
+.flex{
+    display:flex;
+    display:-webkit-flex ;
+}
+.left{
+    float:left;
+}
+.right{
+    float:right;
+    margin-right:30px;
+}
+.hide{
+    display:none;
+}
+/*页面*/
+#page{
+    width:750px;
+}
+header{
+    height:88px;
+    background-color:#eb6134;
+}
+.shopBar .back{
+    width:88px;
+    height:88px;
+    float:left;
+}
+.back_icon{
+    width:20px;
+    height:35px;
+    background: url('../img/icon.png') no-repeat -435px -180px;
+    margin:26px 0 0 33px;
+    float:left;
+}
+#detail{
+    /*float:left;*/
+    font-size:36px;
+    text-align:center;
+    line-height:88px;
+    color:#fff;
+}
+/*table信息*/
+#table{
+    margin-left:18px;
+    background-color:#fff;
+}
+#shopMsg{
+    height:118px;
+    background-color:#fff;
+}
+.shopLogo{
+    margin:38px 16px 38px 18px;
+    width:42px;
+    height:42px;
+    background-color:rgb(255,255,255);
+    border:1px solid rgb(204,204,204);
+    border-radius:6px;
+    line-height:118px;
+}
+.tableMsg{
+    width:638px;
+}
+.shopName{
+    font-size:30px;
+    color:rgb(52,52,52);
+    text-align:left;
+    line-height:118px;
+    width:50%;
+}
+.tableNum{
+    font-size:26px;
+    text-align:right;
+    /*line-height:118px;*/
+    color:rgb(102,102,102);
+    width:50%;
+    float:right;
+    margin-top:40px;
+}
+.table_number{
+    display:block;
+    width:62px;
+    height:38px;
+    border:1px solid rgb(204,204,204);
+    border-radius: 4px;
+    background-color:rgb(247,247,247);
+    color:rgb(52,52,52);
+    line-height:38px;
+    text-align: center;
+    font-size:26px;
+    /*line-height:118px;*/
+}
+div.tableNum:after{
+    content:" ";
+    display:block;
+    clear:both;
+}
+.blank{
+    height:34px;
+}
+.order{
+    margin-left:78px;
+    background-color:#fff;
+    padding-top:34px;
+    border-top: 1px dashed rgb(201,201,201);
+}
+div.order li{
+    margin-bottom:34px;
+}
+.foodName{
+    font-size:28px;
+    color:rgb(52,52,52);
+    width:298px;
+    line-height:28px;
+    text-align:left;
+}
+.foodNum{
+    font-size:28px;
+    color:rgb(153,153,153);
+    line-height:28px;
+    width:224px;
+}
+.foodPayment{
+    font-size:28px;
+    color:rgb(52,52,52);
+    text-align:right;
+    line-height:28px;
+    margin-right:32px;
+    width:100px;
+}
+.taste{
+    color:rgb(153,153,153);
+    line-height:26px;
+    margin-top:8px;
+    font-size:26px;
+}
+/*小计价格*/
+.total{
+    /*width:624px;*/
+    margin-left:76px;
+    text-align:right;
+    font-size:26px;
+    color:rgb(102,102,102);
+    border-top:1px dashed rgb(201,201,201);
+    height:90px;
+    line-height:90px;
+    margin-right:32px;
+}
+.yuan{
+    font-size:30px;
+    color:rgb(235,97,57);
+    line-height:30px;
+}
+.money{
+    font-size:38px;
+    color:rgb(235,97,57);
+    line-height:38px;
+}
+.score{
+    margin-top:15px;
+    font-size:26px;
+    color:rgb(102,102,102);
+    height:88px;
+    line-height:88px;
+    text-align: left;
+}
+.words{
+    padding-left:16px;
+    margin-left:18px;
+    font-size: 28px;
+    height:182px;
+    color:rgb(153,153,153);
+    margin-bottom: 100px;
+    background-color:#fff;
+}
+#comment{
+    width:100%;
+    height:182px;
+    font-size: 28px;
+    border:0 solid rgb(102,102,102);
+}
+textarea::placeholder{
+    color:rgb(153,153,153);
+}
+#shoppingCar{
+    position: fixed;
+    bottom:0;
+    height:96px;
+    line-height:96px;
+}
+#shoppingMsg{
+    background-color:#4b4b4b;
+    width:545px;
+    font-size:26px;
+    color:#fff;
+    padding-left:34px;
+
+}
+#payment{
+    width:205px;
+    background-color:rgb(235,97,57);
+    text-align:center;
+    font-size: 32px;
+    color:rgba(255,255,255,0.98);
+    line-height:96px;
+}
+#shouldPay{
+    font-size: 32px;
+    color:#fff;
+    line-height:32px;
+}
+.discount{
+    font-size:24px;
+    color:rgb(201,201,201);
+    line-height:96px;
+    padding-left:10px;
+}
+#border{
+    border-left:2px solid rgb(201,201,201);
+    padding-left:15px;
+}
+.gray{
+    height:15px;
+    background-color:rgb(245,245,245);
+}
+.white{
+    background-color:#fff;
+    margin-left:18px;
+    padding-left:16px;
+}

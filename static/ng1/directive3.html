@@ -1,0 +1,52 @@
+<!doctype html>
+<html ng-app="myApp">
+<head>
+  <script src="js/angular.min.js"></script>
+</head>
+<body>
+<div sideboxtitle="Links">
+  <ul>
+    <li>First Link</li>
+    <li>Second Link</li>
+  </ul>
+</div>
+
+<div sideboxtitle="TagCloud">
+  <div class="tagcloud">
+    <a href="">Graphics</a>
+  </div>
+</div>
+
+<div ng-controller="Ctrl" sidebox >{{ cc }}
+  <div id="test" class="box"></div>
+</div>
+
+  <script>
+    angular.module('myApp', [])
+    .directive('sidebox', function() {
+      return {
+        restrict: 'EA',
+        // scope: {
+        //   title: '@'
+        // },
+        transclude: true,
+        template: '<h2>{{cc}}</h2>',
+        controller: 'Ctrl'
+      };
+    })
+    .controller('Ctrl',function( $scope, $element, $transclude){
+          $scope.cc = "ctrl";
+          $transclude(function(clone){
+            console.log(clone);
+            var a = angular.element('<a>');
+            a.attr('href',"http://www.daozhao.com");
+            a.text(clone.text());
+            console.log(clone.text());
+            $element.append(a);
+          })
+
+    })
+  </script>
+
+</body>
+</html>

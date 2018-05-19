@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Receiver</title>
+	<script>
+	window.onload = function(){
+		if(typeof window.postMessage == undefined){
+			alert("当前浏览器不支持postMessage");
+			return;
+		}
+    window.addEventListener('message', function(ev){
+    	if(ev.origin != "http://127.0.0.1:8090"){
+    		return;
+    	}
+    	console.log("sender from " + ev.origin );
+    	console.log(ev);
+    }, false);
+	}
+	</script>
+</head>
+<body>
+	<h2 id="receiveMsg">dfdf</h2>
+</body>
+</html>

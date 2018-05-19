@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Web Socket</title>
+</head>
+
+<body>
+    <h1>web socket客户端</h1>
+    <button id="connection" onclick="connect()" disabled="">连接</button>
+    <button id="disConnection" onclick="disConnect()">断开</button>
+    <br />
+    <textarea name="" id="content" cols="50" rows="10" readonly=""></textarea>
+    <br />
+    <br />
+    <button onclick="send('A')">A</button>
+    <button onclick="send('B')">B</button>
+    <button onclick="send('C')">C</button>
+    <button onclick="send('D')">D</button>
+</body>
+<script src="client.js"></script>
+
+</html>

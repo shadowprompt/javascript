@@ -1,0 +1,209 @@
+<!doctype html>
+<html ng-app="myApp">
+<head>
+  <title>Directive</title>
+  <script src="js/Angular1.5.5.js"></script>
+  <style>
+    #parentCtrl {
+      background-color: yellow;
+      padding: 10px;
+    }
+    #childCtrl {
+      background-color: green;
+      padding: 10px;
+    }
+  </style>
+</head>
+<body>
+
+
+  <p>
+      We can access:
+      {{ rootProperty }} and
+      {{ parentProperty }} and
+      {{ childProperty }}
+    </p>
+  <div id="parentCtrl" ng-controller="ParentCtrl">
+    <p>
+        We can access:
+        {{ rootProperty }} and
+        {{ parentProperty }} and
+        {{ childProperty }}
+      </p>
+    <div id="childCtrl" ng-controller="ChildCtrl">
+      <p>
+        We can access:
+        {{ rootProperty }} and
+        {{ parentProperty }} and
+        {{ childProperty }}
+      </p>
+      <p>
+        {{fullSentenceFromChild}}, We can access:
+        {{ rootProperty }} and
+        {{ parentProperty }} and
+        {{ childProperty }}
+      </p>
+    </div>
+  </div>
+
+  <div my-directive my-url="http://google.com" my-link-text="Click me to go to Google" some-pro="someProperty with @ binding">
+  </div>
+  <br />
+  
+  <div ng-controller="SomeController0">
+    {{ someModel.someProperty }}
+    <button ng-click="someAction()">Communicate</button>
+  </div>
+
+  <div ng-controller="SomeController">
+    {{ someBareValue }}
+    <button ng-click="someAction()">Communicate to child</button>
+    <div ng-controller="ChildController">
+      {{ someBareValue }}
+      <button ng-click="childAction()">Communicate to parent</button>
+    </div>
+  </div>
+  隔离scope
+  <div ng-controller="SomeController2" sc-trl>
+    {{ someModel.someValue }}
+    <button ng-click="someAction()">Communicate to child</button>
+    <div ng-controller="ChildController2" sc-trl>
+    {{ someModel.someValue }}
+    <button ng-click="childAction()">Communicate to parent</button>
+    </div>
+  </div>
+  <hr>  
+  <div  ng-controller="sCtrl">
+    <div></div>
+    <div my-dir my-url="http://www.google.com" my-text="谷歌" my-saying="say()"></div>
+  </div>
+
+
+
+  <script>
+    angular.module('myApp', [])
+    .run(function($rootScope) {
+      // use .run to access $rootScope
+      $rootScope.rootProperty = 'root scope';
+    })
+    .controller('ParentCtrl', function($scope) {
+      // use .controller to access properties inside `ng-controller`
+      // in the DOM omit $scope, it is inferred based on the current controller
+      $scope.parentProperty = 'parent scope';
+    })
+    .controller('ChildCtrl', ['$scope', function($scope) {
+      $scope.childProperty = 'child scope';
+      // just like in the DOM, we can access any of the properties in the
+      // prototype chain directly from the current $scope
+      $scope.fullSentenceFromChild = 'Same $scope';
+    }])
+
+    .directive('myDirective', function() {
+      return {
+        restrict: 'A',
+        replace: true,
+        scope: {
+          myUrl: '@', //绑定策略
+          myLinkText: '@', //绑定策略
+          someProperty: '@somePro'
+        },
+        template: '<a href="{{ myUrl }}">{{ myLinkText }} {{someProperty}}</a>'
+      }
+    })
+
+    .controller('SomeController0', function($scope) {
+      //创建模型
+      $scope.someModel = {
+        // 添加属性
+        someProperty: 'hello computer'
+      }
+      // 设置$scope自身的操作
+      $scope.someAction = function() {
+        $scope.someModel.someProperty = 'hello human';
+      };
+    })
+
+    .controller('SomeController', function($scope) {
+      // 反模式，裸值
+      $scope.someBareValue = 'hello computer';
+      // 设置 $scope 本身的操作，这样没问题
+      $scope.someAction = function() {
+        // 在SomeController和ChildController中设置{{ someBareValue }}
+        $scope.someBareValue = 'hello human, from parent';
+      };
+    })
+    .controller('ChildController', function($scope) {
+      $scope.childAction = function() {
+        // 在ChildController中设置{{ someBareValue }}
+        $scope.someBareValue = 'hello human, from child';
+      };
+    })
+
+    .directive('scCtrl',function(){
+      return {
+        restrict: "A",
+        scope: false
+      }
+      
+    })
+    .controller('SomeController2', function($scope) {
+        // 最佳实践，永远使用一个模式
+      $scope.someModel = {
+        someValue: 'hello computer'
+      }
+      $scope.someAction = function() {
+        $scope.someModel.someValue = 'hello human, from parent';
+      };
+    })
+    .controller('ChildController2', function($scope) {
+      $scope.childAction = function() {
+        $scope.someModel.someValue = 'hello human, from child';
+      };
+    })
+
+    .controller('sCtrl', function($scope){
+      $scope.say = function(){
+        alert("saying");
+      }
+    })
+     //$parsers是view 到 model的一个过度，因此当Model不希望有所更新的时候就返回一个undefined，此时它只是Model不去更新了，但你的view还是会更新的，因为我们输入的内容不还是在ng-model内么，只是他不和Model相连接了，嗯我的理解就是失去了双向绑定的特性，封闭“作用域”。
+    .directive("myDir", function(){
+      return {
+        restrict: "AE",
+        // scope:false,
+        scope:{
+          myUrl: '@',
+          myText: '@',
+          mySay: '&mySaying'
+        },
+        template: '<p style="background-color:{{color}}"><a href="{{ myUrl }}">{{myText}}</a> <button ng-click="mySay()">say</button>-----</p>',
+        link:function(scope, ele, attr){
+          ele.bind('click', function(){
+            console.log(this);
+            // ele.css('background-color', 'blue');
+            scope.$apply(function(){
+              scope.color = 'yellow';
+            })
+          });
+          ele.bind('mouseover', function() {
+            ele.css('cursor', 'pointer');
+          });
+
+          (function(){
+            console.log(a);
+            console.log(a+b);
+            var a=5;
+            var b="5";
+            function p(){
+              return a+b;
+            }
+            console.log(p());
+          })();
+        }
+
+      };
+    })
+  </script>
+
+</body>
+</html>

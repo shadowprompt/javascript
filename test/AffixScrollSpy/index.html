@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Bootstrap’s Affix and ScrollSpy plugins</title>
+</head>
+<body>
+<div class="col-md-3 scrollspy">
+    <ul id="nav" class="nav hidden-xs hidden-sm" data-spy="affix">
+        <li>
+            <a href="#web-design">Web Design</a>
+        </li>
+        <li>
+            <a href="#web-development">Web Development</a>
+            <ul class="nav">
+                <li>
+                    <a href="#ruby">
+                        <span class="fa fa-angle-double-right"></span>Ruby
+                    </a>
+                </li>
+                <li>
+                    <a href="#python">
+                        <span class="fa fa-angle-double-right"></span>Python
+                    </a>
+                </li>
+
+            </ul><!--end of sub navigation-->
+        </li>
+
+    </ul><!-- end of main navigation -->
+</div>
+<div class="col-md-9">
+    <section id="web-design">
+        Web
+    </section>
+    <section id="web-development">
+        <section id="ruby">
+            ruby
+        </section>
+        <section id="python">
+            python
+        </section>
+
+    </section>
+</div>
+<script src="../../static/jquery.min.js"></script>
+<script src="../../static/bootstrap.min.js"></script>
+<script src="index.js"></script>
+</body>
+</html>

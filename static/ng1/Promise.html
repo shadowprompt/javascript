@@ -1,0 +1,84 @@
+<!doctype html>
+<html ng-app="myApp">
+<head>
+  <title>Promise</title>
+  <script src="js/Angular1.5.5.js"></script>
+</head>
+<body>
+
+  <div ng-controller="HomeController">
+    好的{{progress}}
+  </div>
+  
+  <script>
+    angular.module('myApp', [])
+    .factory('GithubService', function($q, $http){
+      //从仓库获取事件
+      var getEventsFromRepo = function(){
+        //任务
+        $http.get('https://api.github.com/repos/angular/angular.js/pulls')
+        .success(function(data){
+          console.log(data);
+          return data;
+        })
+        // .error(function(reason){
+        //   return;
+        // })
+      };
+      var service = {
+        makeMultipleRequests: function(repos){
+          var d = $q.defer(),
+            percentComplete = 0,
+            output = [];
+          for (var i=0;i<repos.length;i++){
+            output.push(getEventsFromRepo(repos[i]));
+            percentComplete = (i+1)/repos.length * 100;
+            d.notify(percentComplete);
+          }
+          console.log(output);
+          d.resolve(output);
+          return d.promise;
+        },
+      };
+      return service;
+    })
+    .factory('GithubService2', function($q, $http){
+      var getPullRequests = function(){
+        var deferred = $q.defer();
+        //从github获取打开的angularjs pull请求列表
+        $http.get('https://api.github.com/repos/angular/angular.js/pulls')
+        .success(function(data){
+          deferred.resolve(data);
+        })
+        .error(function(reason){
+          deferred.reject(reason);
+        })
+        return deferred.promise;
+      };
+      return { //返回工厂对象
+        getPullRequests: getPullRequests
+      }
+    })
+    .controller('HomeController', function($scope, GithubService){
+      GithubService.makeMultipleRequests([
+        'auser/beehive', 'angular/angular.js'
+      ])
+      .then(function(result){
+        //处理结果
+        console.log("成功");
+      }), function(err){
+        //发生错误
+        console.log("失败");
+      }, function(percentComplete){ //此函数未执行，并且此处取不到percentComplete的值
+        console.log(percentComplete);
+        $scope.progress = percentComplete;
+        console.log(percentComplete);
+      }
+    })
+   
+
+
+  </script>
+
+</body>
+</html>

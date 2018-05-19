@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Web workers</title>
+</head>
+<body>
+	<h1>Web workers求质数和</h1>
+	请输入：<input id="num" value="10"></input>
+	<button onclick="calculate()">计算</button><hr />
+	<h3 id="sum"></h3>
+</body>
+	<script>
+	var worker = new Worker("Fworker.js");
+
+	worker.onmessage=function(event){
+		console.log(3);
+		var intArray=JSON.parse(event.data);
+		console.log(intArray);
+		var tem="所有质数：";
+		for(var i=0;i<intArray.length-1;i++){
+			tem+=intArray[i]+"，";
+		}
+		tem=tem.substr(0,tem.length-1);
+		tem+="<br/>质数总和："+intArray[intArray.length-1];
+		document.getElementById("sum").innerHTML=tem;
+	}
+	function calculate(){
+		var num=parseInt(document.getElementById("num").value,10);
+		worker.postMessage(num);
+	}
+	</script>
+</html>

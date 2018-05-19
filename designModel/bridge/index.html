@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>桥接模式</title>
+</head>
+
+<body>
+    实现多元化对象
+    <script>
+        //多维变量类
+        //运动单元
+        function Speed(x, y) {
+            this.x = x;
+            this.y = y;
+        }
+        Speed.prototype.run = function() {
+                console.log('跑起来');
+            }
+            //着色单元
+        function Color(cl) {
+            this.color = cl;
+        }
+        Color.prototype.draw = function() {
+                console.log('绘制色彩');
+            }
+            //变形单元
+        function Shape(sp) {
+            this.shape = sp;
+        }
+        Shape.prototype.change = function() {
+                console.log('改变形状');
+            }
+            //说话单元
+        function Speek(wd) {
+            this.word = wd;
+        }
+        Speek.prototype.say = function() {
+            console.log('书写字体');
+        }
+
+        function Ball(x, y, c) {
+            this.speed = new Speed(x, y);
+            this.color = new Color(c);
+        }
+        Ball.prototype.init = function() {
+            this.speed.run();
+            this.color.draw();
+        }
+
+        var b = new Ball(10, 12, 'red');
+        b.init();
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,11 @@
+<label class="col-sm-2 control-label">昵称</label>
+<div class="col-sm-8">
+	<input type="text" name="nickname" [(ngModel)]="theuser.nickname" #nicknameC="ngModel"  required="true" minlength="5">{{theuser.nickname}}
+	<span *ngIf="nicknameC.pristine" class="label label-primary">未修改</span>
+	<span *ngIf="nicknameC.dirty" class="label label-warning">已修改</span>
+	<span *ngIf="nicknameC.valid" class="label label-success">有效</span>
+	<!-- <input type="text" name="nickname" required="true"> -->
+</div>
+<div class="col-sm-2">
+	
+</div>

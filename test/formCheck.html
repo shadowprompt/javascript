@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>表单校验</title>
+</head>
+
+<body>
+    <div>
+        <input type="text" id="test1" onkeyup="this.value=/^\d+\.?\d{0,2}$/.test(this.value) ? this.value : this.value.substring(0,this.value.length-1);">
+        <div>
+            <div>
+                表单校验
+            </div>
+            <div>
+                <input type="text" class="input1">
+            </div>
+            <div>
+                <input type="text" class="input2">
+            </div>
+            <div>
+                <input type="text" class="input3">
+            </div>
+            <div>
+                <button class="btn">提交</button>
+            </div>
+        </div>
+        <hr/>
+        <button class="btnAjax">ajax请求</button>
+    </div>
+    <script src="../static/zepto-1.2.0.js"></script>
+    <script src="../static/underscore-1.8.3.js"></script>
+    <script src="../static/backbone.js"></script>
+    <script src="formCheck.js"></script>
+</body>
+
+</html>

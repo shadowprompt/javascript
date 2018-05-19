@@ -1,0 +1,56 @@
+<html ng-app="myApp">  
+  <head>
+  <title>Parsers</title>  
+ <script src="js/Angular1.5.5.js" ></script>
+ <script type="text/javascript">  
+
+ angular.module("myApp",[])
+ .controller("TestController", function($scope) {
+    $scope.obj = {
+      number: 34
+    };
+   })
+
+ //$parsers是view 到 model的一个过渡，因此当Model不希望有所更新的时候就返回一个undefined，此时它只是Model不去更新了，但你的view还是会更新的，因为我们输入的内容不还是在ng-model内么，只是他不和Model相连接了，嗯我的理解就是失去了双向绑定的特性，封闭“作用域”。
+   .directive("ngTest", function(){
+     return {
+       require: "?ngModel",
+       restrict: "AE",
+       link: function($scope, iElm, iAttrs, ngModel) {
+         if(!ngModel) return;
+         ngModel.$parsers.push(function(viewValue){
+           var num = parseInt(viewValue);
+           if(num>=0 && num<99){
+            //$setValidity 来设置错误的标志
+            //为一个函数，接受两个参数，第一个参数为错误标志的名字，是字符串类型，将会被设置成$error的属性
+             ngModel.$setValidity("test",true);
+             console.log(ngModel);
+             return viewValue;
+           }else{
+             ngModel.$setValidity("test",false);
+             console.log(ngModel);
+             return undefined;
+           }
+           
+         });
+       }
+     };
+   });
+ </script>  
+ </head>  
+ <body>  
+  <div ng-controller="TestController">
+    <p>$parsers是view 到 model的一个过渡，因此当Model不希望有所更新的时候就返回一个undefined，此时它只是Model不去更新了，但你的view还是会更新的，因为我们输入的内容不还是在ng-model内么，只是他不和Model相连接了，嗯我的理解就是失去了双向绑定的特性，封闭“作用域”。</p>
+    <form name="testForm">
+      <p>输入值未0~99之间时设置test为true</p>
+     <input type="text" name="inputs" ng-test ng-model="obj.number"><br />
+     <div>$error.test = {{ testForm.inputs.$error.test }}</div>
+     <div>$valid = {{ testForm.inputs.$valid }}</div>
+     <div>$invalid = {{ testForm.inputs.$invalid }}</div>
+     
+     <div>{{ obj.number }}</div>
+    </form>
+ </div>
+ <hr>  
+ </body>  
+ </html>

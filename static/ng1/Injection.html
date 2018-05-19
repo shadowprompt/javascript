@@ -1,0 +1,139 @@
+<!doctype html>
+<html>
+    <head>
+    	<meta charset="UTF-8">
+      <title>Injection</title>
+        <script type="text/javascript" src="js/Angular1.5.5.js"></script>
+    </head>
+    <body  ng-app="myApp">
+        Your name: <input type="text" ng-model="yourname" placeholder="World">
+        <hr>
+        Hello {{yourname || 'World'}}!
+        <div ng-controller="valueCtrl">
+        	<input ng-model="data.msg" />
+        </div>
+        <div ng-controller="factoryCtrl">
+        	<span ng-bind="da.msg"></span>
+        </div>
+        <div ng-controller = "CalcController">
+         <p>输入一个数字: （默认是5）<input type = "number" ng-model = "number" /></p>
+         <p><button ng-click = "square()">X<sup>2</sup></button>结果: {{result}}</p>
+         <p><button ng-click = "divide()">100/X</button>结果: {{result2}}</p>
+         <p><button ng-click = "divide2()">200/X</button>结果: {{result3}}</p>
+      </div>
+      <hr>
+      <div ng-controller="MyController">
+        <div ng-controller="MyController">
+          <button ng-click="sayHello()">Hello</button>
+        </div>
+      </div>
+
+      <div ng-controller="myCtrl"></div>
+
+      <script type="text/javascript">
+        var myapp = angular.module("myApp",[])
+        myapp.value("defaultInput", "这是默认输入")//Value 是一个简单的 javascript 对象，用于向控制器传递值（配置阶段）
+        myapp.value("defaultNum", 5)
+        .factory('DT',function(){ //factory 是一个函数用于返回值。在 service 和 controller 需要时创建。
+                      //通常我们使用 factory 函数来计算或返回值。
+          return {
+            msg:'我来自factory--DT',
+          }
+        })
+
+        /**AngularJS 中通过 provider 创建一个 service、factory等(配置阶段)。
+        Provider 中提供了一个 factory 方法 get()，它用于返回 value/service/factory。*/
+
+        // 使用 provider 创建 service 定义一个方法用于计算两数乘积
+        myapp.config(function($provide) {
+           $provide.provider('MathService', function() {
+              this.$get = function() { //放到$get里面
+                 var factory = {};  
+                 
+                 factory.multiplication = function(a, b) {
+                    return a * b; 
+                 }
+                 factory.division = function(b) {
+                    return 100 / b; 
+                 }
+                 return factory;
+              };
+              console.log(this.$get);
+           });
+
+        });
+
+        myapp.factory('MathFactory', function() {
+          var factory = {};
+
+          factory.division = function(a) {
+            return 200 / a;
+          }
+          return factory;
+        });
+
+        myapp.service('CalcService', function(MathService){
+          this.square = function(a) {
+            return MathService.multiplication(a,a);
+          }
+          this.divide = function(a) {
+            return MathService.division(a);
+          }
+        });
+
+
+
+        myapp.controller('CalcController', function($scope, CalcService, defaultNum, MathFactory) {
+          $scope.number = defaultNum;
+            $scope.result = CalcService.square($scope.number);
+            $scope.result2 = CalcService.divide($scope.number);
+            $scope.result3 = MathFactory.division($scope.number);
+
+
+            $scope.square = function() {
+               $scope.result = CalcService.square($scope.number);
+          }
+
+          $scope.divide = function() {
+               $scope.result2 = CalcService.divide($scope.number);
+          }
+
+          $scope.divide2 = function() {
+               $scope.result3 = MathFactory.division($scope.number);
+          }
+        });
+
+
+        myapp.controller('factoryCtrl',function($scope,DT){
+          //$scope.data={msg:'我是第一个'}
+          $scope.da=DT;
+        });
+
+        myapp.controller('valueCtrl',function($scope, defaultInput){
+          $scope.data={msg:defaultInput}
+        });
+
+        myapp.factory('greeter', function() {
+          return {
+            greet: function(msg) {
+              alert(msg);
+            }
+          }
+        });
+        myapp.controller('MyController', function($scope, greeter) {
+          $scope.sayHello = function() {
+            greeter.greet("Hello!");
+          };
+        });
+
+        var aControllerFactory = function aController($scope, greeter){
+          console.log("Loaded controller", greeter);
+        };
+        aControllerFactory.$inject = ['$scope', 'greeter'];
+        console.log("greeter service");
+        myapp.controller('myCtrl', aControllerFactory);
+        //myapp.factory('greeter', greeterService);
+
+      </script>
+    </body>
+</html>

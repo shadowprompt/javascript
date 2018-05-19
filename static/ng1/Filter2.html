@@ -1,0 +1,185 @@
+<html>  
+  <head>
+  <title>Filter2</title>
+  <link rel="stylesheet" href="http://cdn.jsdelivr.net/foundation/4.3.2/css/foundation.min.css">
+ <script src="js/Angular1.5.5.js" ></script>
+ <script type="text/javascript">  
+ // function windowScopedFilter (input) {  
+ //      var output = [];  
+ //      angular.forEach(input, function(v,k){  
+ //           if (v.phone.contains("555")) {  
+ //                output.push(v);  
+ //           }  
+ //      });  
+ //      return output;       
+ // }  
+ var myapp = angular.module('MyFilterApp', []);  
+ myapp.filter('myfilter', function() {  
+   return function(input, param1) {  
+      console.log("------------------------------------------------- begin dump of custom parameters");  
+      console.log("input=",input);  
+      console.log("param1(string)=", param1);  
+      var args = Array.prototype.slice.call(arguments);  
+      console.log("args=", args);  
+      if (3<=args.length) {  
+           console.log("param2(string)=", args[2]);  
+      }  
+      if (4<=args.length) {  
+           console.log("param3(bool)=", args[3]);  
+      }  
+      console.log("------------------------------------------------- end dump of custom parameters"); 
+      console.log(window);
+      // filter  
+      // if (5<=args.length) {  
+      //      return window[args[4]](input);  
+      // }  
+      return input;  
+   };  
+ });  
+ myapp.controller('MyFilterController', ['$scope', function($scope) {  
+   $scope.friends = [{name:'John', phone:'555-1276'},  
+                      {name:'Annie', phone:'800-BIG-MARY'},  
+                      {name:'Mike', phone:'555-4321'},  
+                      {name:'Adam', phone:'555-5678'},  
+                      {name:'David', phone:'555-8765'},  
+                      {name:'Mikay', phone:'555-5678'}];  
+ }]);
+ myapp.directive('ensureUnique', ['$http', function($http) {
+  return {
+    require: 'ngModel',
+    link: function(scope, ele, attrs, c) {
+      scope.$watch(attrs.ngModel, function() {
+        $http({
+          method: 'POST',
+          url: '/api/check/' + attrs.ensureUnique,
+          data: {'field': attrs.ensureUnique}
+        }).success(function(data, status, headers, cfg) {
+          c.$setValidity('unique', data.isUnique);
+        }).error(function(data, status, headers, cfg) {
+          c.$setValidity('unique', false);
+        });
+      });
+    }
+  };
+}]);
+
+myapp.controller('signupController', ['$scope', function($scope) {
+  $scope.submitted = false;
+  $scope.signupForm = function() {
+    if ($scope.signup_form.$valid) {
+      // Submit as normal
+    } else {
+      $scope.signup_form.submitted = true;
+    }
+  }
+}]);
+ </script>  
+ </head>  
+ <body ng-app="MyFilterApp">  
+ <div ng-controller="MyFilterController">  
+      <table id="searchTextResults">  
+       <tr><th>Name</th><th>Phone</th></tr>  
+       <tr ng-repeat="friend in friends |myfilter:'param1':'param2':true:'windowScopedFilter'">  
+        <td>{{friend.name}}</td>  
+        <td>{{friend.phone}}</td>  
+       </tr>  
+      </table>  
+ </div>  
+ <hr> 
+ <form name="signup_form" novalidate ng-submit="signupForm()" ng-controller="signupController">
+  <fieldset>
+    <legend>Signup</legend>
+
+    <div class="row">
+      <div class="large-12 columns">
+        <label>Your name</label>
+        <input type="text"
+               placeholder="Name"
+               name="name"
+               ng-model="signup.name"
+               ng-minlength=3
+               ng-maxlength=20 required />
+        <div class="error"
+            ng-show="signup_form.name.$invalid && signup_form.submitted">
+        <small class="error"
+            ng-show="signup_form.name.$error.required">
+               Your name is required.
+        </small>
+        <small class="error"
+               ng-show="signup_form.name.$error.minlength">
+               Your name is required to be at least 3 characters
+        </small>
+        <small class="error"
+               ng-show="signup_form.name.$error.maxlength">
+               Your name cannot be longer than 20 characters
+        </small>
+      </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="large-12 columns">
+        <label>Your email</label>
+        <input type="email"
+          placeholder="Email"
+          name="email"
+          ng-model="signup.email"
+          ng-minlength=3 ng-maxlength=20 required />
+        <div class="error"
+             ng-show="signup_form.name.$dirty && signup_form.name.$invalid && signup_form.submitted">
+          <small class="error"
+                 ng-show="signup_form.email.$error.required">
+                 Your email is required.
+          </small>
+          <small class="error"
+                 ng-show="signup_form.email.$error.minlength">
+                 Your email is required to be at least 3 characters
+          </small>
+          <small class="error"
+                 ng-show="signup_form.email.$error.email">
+                 That is not a valid email. Please input a valid email.
+          </small>
+          <small class="error"
+                 ng-show="signup_form.email.$error.maxlength">
+                 Your email cannot be longer than 20 characters
+          </small>
+        </div>
+      </div>
+    </div>
+
+    <div class="large-12 columns">
+      <label>Username</label>
+        <input  type="text"
+                placeholder="Desired username"
+                name="username"
+                ng-model="signup.username"
+                ng-minlength=3
+                ng-maxlength=20
+                ensure-unique="username" required />
+      <div class="error"
+           ng-show="signup_form.name.$invalid && signup_form.submitted">
+        <small class="error"
+               ng-show="signup_form.username.$error.required">
+               Please input a username
+        </small>
+        <small class="error"
+               ng-show="signup_form.username.$error.minlength">
+               Your username is required to be at least 3 characters
+        </small>
+        <small class="error"
+               ng-show="signup_form.username.$error.maxlength">
+               Your username cannot be longer than 20 characters
+        </small>
+        <small class="error"
+               ng-show="signup_form.username.$error.unique">
+               That username is taken, please try another
+        </small>
+      </div>
+    </div>
+
+    <button type="submit" class="button radius">Submit</button>
+  </fieldset>
+</form>
+
+ </body>  
+ </html>

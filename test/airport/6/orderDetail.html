@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+    <link rel="stylesheet" href="css/weui.min.css">
+    <link rel="stylesheet" href="css/orderDetail.css">
+    <title>订单详情</title>
+</head>
+
+<body>
+    <div id="page">
+        <!--头部信息-->
+        <header>
+            <!--返回  订单详情-->
+            <div class="shopBar">
+                <a href="javascript:window.history.back(-1);" class="back"><span class="back_icon"></span></a>
+                <div id="detail">订单详情</div>
+            </div>
+        </header>
+        <!--桌子信息-->
+        <div id="table">
+            <!--品牌以及桌号-->
+            <div class="flex" id="shopMsg">
+                <div class="shopLogo"><img src="" alt=""></div>
+                <div class="tableMsg flex">
+                    <div class="shopName">必胜客</div>
+                    <div class="tableNum"><span>桌号：</span><input type="text" value="22" class="table_number right" maxlength="3"></div>
+                </div>
+            </div>
+            <!--<div class="blank"></div>-->
+            <!--菜单   数量   价格-->
+            <div class="order">
+                <ul>
+                    <li>
+                        <div class="flex">
+                            <div class="foodName">
+                                <div>凉拌黄瓜</div>
+                                <div></div>
+                            </div>
+                            <div class="foodNum">×1</div>
+                            <div class="foodPayment">¥3</div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="flex">
+                            <div class="foodName">
+                                <div>重庆毛血旺</div>
+                                <div class="taste">微辣</div>
+                            </div>
+                            <div class="foodNum">×1</div>
+                            <div class="foodPayment">¥12</div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="flex">
+                            <div class="foodName">
+                                <div>农家小炒肉</div>
+                                <div></div>
+                            </div>
+                            <div class="foodNum">×1</div>
+                            <div class="foodPayment">¥3</div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="flex">
+                            <div class="foodName">
+                                <div>农家小炒肉</div>
+                                <div></div>
+                            </div>
+                            <div class="foodNum">×1</div>
+                            <div class="foodPayment">¥3</div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="flex">
+                            <div class="foodName">
+                                <div>农家小炒肉</div>
+                                <div></div>
+                            </div>
+                            <div class="foodNum">×1</div>
+                            <div class="foodPayment">¥3</div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <!--小计价格-->
+            <div class="total">
+                小计:<span class="yuan">¥</span><span class="money shouldPay">43</span>
+            </div>
+        </div>
+        <div class="gray"></div>
+        <!--可用积分 抵扣-->
+        <div class="white">
+            <div class="weui-cell weui-cell_switch score">
+                <div class="weui-cell__bd">可用积分<span>3800</span>分，本单可使用2000抵扣¥<span class="yuan benefit">20.00</span></div>
+                <div class="weui-cell__ft">
+                    <label for="switchCP" class="weui-switch-cp">
+                        <input id="switchCP" class="weui-switch-cp__input" type="checkbox" checked="checked">
+                        <div class="weui-switch-cp__box"></div>
+                    </label>
+                </div>
+            </div>
+        </div>
+        <!--向店家留言-->
+        <div class="words">
+            <textarea name="" id="comment" placeholder="向店家留言"></textarea>
+        </div>
+        <!--底部支付页面-->
+        <div id="shoppingCar" class="flex">
+            <!--购物信息-->
+            <div id="shoppingMsg" class="flex">
+                <!--购物价格-->
+                <div>
+                    共 <span id="num">6</span> 件商品，合计 ¥<span id="shouldPay" class="shouldPay">46</span>
+                </div>
+                <div class="discount">
+                    <span id="border">已优惠 ¥ </span><span class="benefit">20.00</span>
+                </div>
+            </div>
+            <!--买单-->
+            <div id="payment">
+                去支付
+            </div>
+        </div>
+    </div>
+    <script src="js/jquery.min.js"></script>
+    <script src="js/viewport.js"></script>
+    <script src="js/orderDetail.js"></script>
+</body>
+
+</html>

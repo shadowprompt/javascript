@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>组合模式</title>
+</head>
+
+<body>
+    <script>
+        function createSub(o) //这个o相当于父对象实例
+        {
+            function F() {} //这个F相当子对象
+            F.prototype = o; //继承
+            return new F(); //实例化传出
+        }
+
+        function inheritPrototype(subType, superType) {
+            var prototype = createSub(superType.prototype); //创建对象
+            prototype.construct = subType; //增强对象
+            subType.prototype = prototype; //指定对象
+        }
+
+        var News = function() {
+            this.children = [];
+            this.element = null;
+        }
+        News.prototype = {
+            init: function() {
+                throw new Error('请重写你的init方法')
+            },
+            add: function() {
+                throw new Error('请重写你的add方法')
+            },
+            getElement: function() {
+                throw new Error('请重写你的getElement方法')
+            }
+        }
+
+        var Container = function(id, parent) {
+            //构造函数继承父类
+            News.call(this);
+            this.id = id;
+            this.parent = parent;
+            this.init();
+        }
+            //寄生式继承父类原型方法
+        inheritPrototype(Container, News);
+
+        Container.prototype.init=function(){
+            this.element=document.createElement('ul');
+            this.element.id=this.id;
+            this.element.className='new-container';
+        };
+        Container.prototype.add=function(child){
+            this.children.push(child);
+            thie.element.appendChild(child.getElement());
+            return this;
+        }
+
+        Container.prototype.getElement=function(){
+            return this.element;
+        }
+
+        Container.prototype.show=function(){
+            this.parent.appendChild(this.element);
+        }
+
+        //Item
+        var Item = function(className) {
+            //构造函数继承父类
+            News.call(this);
+            this.className = className || '';
+            this.init();
+        }
+            //寄生式继承父类原型方法
+        inheritPrototype(Item, News);
+
+        Item.prototype.init=function(){
+            this.element=document.createElement('li');
+            this.element.className=this.className;
+        };
+        Item.prototype.add=function(child){
+            this.children.push(child);
+            thie.element.appendChild(child.getElement());
+            return this;
+        }
+
+        Item.prototype.getElement=function(){
+            return this.element;
+        }
+
+        //NewsGroup
+        var NewsGroup = function(className) {
+            //构造函数继承父类
+            News.call(this);
+            this.className = className || '';
+            this.init();
+        }
+            //寄生式继承父类原型方法
+        inheritPrototype(NewsGroup, News);
+
+        NewsGroup.prototype.init=function(){
+            this.element=document.createElement('div');
+            this.element.className=this.className;
+        };
+        NewsGroup.prototype.add=function(child){
+            this.children.push(child);
+            thie.element.appendChild(child.getElement());
+            return this;
+        }
+
+        NewsGroup.prototype.getElement=function(){
+            return this.element;
+        }
+
+        var len = arrs.length;
+        for(var i=arrs[len-1];i>=0;i--){
+            if(scrollTop + 300>arrs[i]){
+                var f = i-1;
+                if(f<0) f=0;
+                show(f);
+            }
+        }
+
+    </script>
+</body>
+
+</html>

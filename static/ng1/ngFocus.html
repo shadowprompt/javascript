@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+<head>
+	<meta charset="UTF-8">
+	<link rel="stylesheet" href="http://cdn.jsdelivr.net/foundation/4.3.2/css/foundation.min.css">
+  	<script src="js/Angular1.5.5.js" ></script>
+	<title>ngFocus</title>
+</head>
+<body>
+	<script type="text/javascript">
+		angular.module('myApp',[])
+		.controller('myCtrl', ['$scope', function($scope){
+			$scope.name="cct";
+			console.log($scope.name);
+		}])
+		// .directive('ngFocus', [function() {
+		// 	var FOCUS_CLASS = "ng-focused";
+		// 		return {
+		// 			restrict: 'A',
+		// 			require: 'ngModel',
+		// 			link: function(scope, element, attrs, ctrl) {
+		// 				ctrl.$focused = false;
+		// 				element.bind('focus', function(evt) {
+		// 					element.addClass(FOCUS_CLASS);
+		// 					scope.$apply(function() {
+		// 						ctrl.$focused = true;
+		// 					});
+		// 				}).bind('blur', function(evt) {
+		// 					element.removeClass(FOCUS_CLASS);
+		// 					scope.$apply(function() {
+		// 						ctrl.$focused = false;
+		// 					});
+		// 				});
+		// 			}
+		// 		};
+		// }]);
+	</script>
+	<form name="sign_form" ng-controller="myCtrl" novalidate>
+		<input type="text" ng-minlength="3" ng-maxlength="8" ng-model="name">{{name}}
+		<div ng-show="sign_form.name.$focus">出错了</div>
+	</form>
+
+</body>
+</html>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>apply and call方法</title>
+</head>
+<body>
+	<input type="text" id="myText"   value="input text">
+    <script type="text/javascript">
+        function Person(name, age) {
+            this.name = name;
+            this.age = age;
+        }
+
+        function Student(name, age, grade) {
+            Person.apply(this, [name]);
+            // Person.apply(this, arguments);
+            this.grade = grade;
+        }
+
+        var student = new Student('张三', 4, '一年级');
+        console.log(student);
+
+        function Student2(name, age, grade) {
+            //这里this后面的参数个数、顺序均是根据Person里面的参数来决定的
+            Person.call(this, name);
+            this.grade = grade;
+        }
+        var student2 = new Student2('李四', 5, '二年级');
+        console.log(student2);
+
+        function Obj() {
+            this.value = "对象！";
+        }
+        var value = "global 变量";
+
+        function Fun1() {
+            console.log(this.value);
+        }
+
+        window.Fun1(); //global 变量
+        Fun1.call(window); //global 变量
+        Fun1.call(document.getElementById('myText')); //input text
+        Fun1.call(new Obj()); //对象！
+        function ar() {
+            var args = Array.prototype.slice.call(arguments);
+            var arr = ["1", "2"];
+            console.log(arr.slice(arguments));
+            console.log(Array.prototype.slice.call(this, arguments));
+            console.log(args);
+            console.log(args[0]);
+        }
+        ar(["aa", "ab", "ac"]);
+
+        (function(a) {
+            console.log(this);
+            console.log(this == 0)
+            return a;
+        })();
+    </script>
+</body>
+</html>

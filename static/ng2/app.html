@@ -1,0 +1,6 @@
+<input type="text" #addto placeholder="add todo"><button (click)="addTodo(addto.value)">add</button>
+<ul>
+  <li  *ngFor="let todo of todos; let i =index" (click)="toggleCompletion(i)" [class.completed]="todo.completed"><input type="checkbox">
+    {{todo.label}} 
+  </li>
+</ul>

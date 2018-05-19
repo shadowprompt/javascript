@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Listener</title>
+	<script>
+	window.onload = function(){
+		//响应事件
+		window.addEventListener('message',function(event) {
+			if(event.origin !== 'http://127.0.0.1:8090') return;
+			// 如果本页被包含在某页的iframe中，则下面的console.log()的输出也会在该页的控制台输出
+			console.log('message received:  ' + event.data);
+			event.source.postMessage('holla back !',event.origin);
+		},false);
+	}
+	</script>
+</head>
+<body>
+	<!-- <iframe src="http://localhost:8080/sender.html" width="400"></iframe> -->
+</body>
+</html>

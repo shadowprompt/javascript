@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Filter</title>
+	<script src="js/Angular1.5.5.js" ></script>
+</head>
+<body ng-app="myApp">
+	<script type="text/javascript">
+		var app = angular.module('myApp', []);
+		app.controller("myC", ['$scope', '$filter', function($scope, $filter){
+			//简单的过滤
+			 $scope.myT = $filter('lowercase')("WuHan");
+
+		}]);
+
+		app.controller("myCtrl", function($scope){
+			 $scope.names = [
+		        {name:'Jani',country:'Norway'},
+		        {name:'Hege',country:'Sweden'},
+		        {name:'Kai',country:'Denmark'}
+		    ];
+
+		});
+
+		app.filter('filter1', function() {
+		    return function(item){
+					return item + '[追加内容：单参数在此过滤！]';
+			}
+		});
+
+		app.filter('filter2', function(){
+		    return function(item,num){
+		        for(var i = 0;i < num;i++){
+		            item = item + '!';
+		        }
+		        return item;
+		    }
+		});
+
+		app.filter('filter3', function(){
+		    return function(items){
+		        angular.forEach(items,function(item, i){
+		            item = i+'、'+ item + '===';
+		            items[i] = item;
+		        });
+		        return items;
+		    }
+		});
+		app.filter('filter4', function(){
+		    return function(input) {
+		        var words = input.split(' ');
+		        for (var i = 0; i < words.length; i++) {
+		          words[i] = words[i].charAt(0).toUpperCase() + words[i].slice(1);
+		        }
+		        return words.join(' ');
+		    }
+		});
+		app.filter('capitalize', function(){
+		    return function(input) {
+		        if(input){
+		        	return input[0].toUpperCase() + input.slice(1);
+		        }
+		    }
+		});
+				
+	</script>
+	<div ng-controller="myC">
+		{{myT}}
+	</div>
+
+	<div ng-controller="myCtrl">
+
+		<hr>
+		<p>输入过滤:</p>
+		<p><input type="text" ng-model="test"></p>
+		<ul>
+			<li ng-repeat="x in names | filter: test | orderBy:'country'">
+			{{ x.name  + ', ' + x.country }}
+			</li>
+		</ul>
+		<hr>
+
+		<h3>一、第一种过滤器：</h3><br/>
+		原有数据：{{names[0].name}}<br/>
+		过滤数据：{{names[0].name | filter1}}
+		<hr>
+		<h3>二、第二种带参数过滤器：</h3><br/>
+		原有数据：{{names[0].name}}<br/>
+		过滤数据：{{names[0].name | filter2:5 }}
+		<hr>
+		<h3>三、第三种数组过滤器：</h3><br/>
+		<ul>
+		    <li ng-repeat="word in ['aa','bb','vv','mm'] | filter3">{{word}}</li>
+		</ul>
+		<hr>
+		<h3>四、首字母大写过滤器：</h3><br/>
+		{{'this is angular js course on each.com' | filter4}}
+		<hr>
+		<h4>将首字母转为大写</h4>
+		原有数据：google<br/>
+		过滤数据：{{'google' | capitalize }}
+	</div>
+	
+</body>
+</html>

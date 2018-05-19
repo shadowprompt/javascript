@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+
+<title>Test</title>
+    <style type="text/css" media="screen">
+        .blue {
+                color:blue;
+            }
+        .red {
+            color:red;
+        }
+
+
+    </style>
+</head>
+
+<body>
+<!--     <p class="blue" class="red">aabb</p>
+    <p class="red" class="blue">aabb</p> -->
+    <p class="blue red">aabb</p>
+    <p class="red blue">aabb</p>
+
+    <!-- <div class="myframe">
+        <iframe id="che" name="che" style="display:block;margin-top:-100px" frameborder="0" framewidth="0" frameheight="0" width="100%" height="100%" src="http://m.che168.com/pinggu/"></iframe>
+    </div> -->
+    <script src="../static/jquery-3.1.1.js"></script>
+    <script src="../static/underscore-1.8.3.js"></script>
+    <script src="../static/backbone.js"></script>
+    <script src="test.js"></script>
+    <script>
+        function foo(i) {
+            var a = 'hello';
+            var b = function privateB() {
+                return 9;
+            };
+            function c() {
+                var k = 10;
+                return k
+            }
+        }
+
+        foo(22);
+
+        jQuery(document).ready(function($) {
+            $('.div2').addClass('move');
+        });
+
+        $(document).off().on('click', '.btnAjax', function () {
+            $.ajax({
+                url: 'http://www.qq-ex.com/user/h0trace/index?search=1000087082300',
+                // url: 'http://127.0.0.1:3000/test',
+                type: 'GET',
+                // dataType: 'jsonp',
+                // jsonp: "callback",
+                // jsonpCallback: "success_jsonpCallback",
+                // data: { param1: 'value1' },
+                success: function (res, staus, xhr) {
+                    console.log("success");
+                    console.log(res);
+                    var r = res.match(/<table[\w\W]*<\/table>/);
+                    var div = document.createElement('div');
+                    div.innerHTML = r;
+                    document.body.appendChild(div);
+                    console.log($('td'));
+                    console.log(r);
+                },
+                error: function () {
+                    console.log("error");
+                }
+            })
+
+
+        })
+        function success_jsonpCallback() {
+            console.log("success_jsonpCallback");
+        }
+
+        (function () {
+            function arr(a, n) {
+                return Array.prototype.slice.call(a, n || 0);
+            }
+
+            function partial_left(f) {
+                var args = arguments;
+                return function () {
+                    var a = arr(args, 1);
+                    a = a.concat(arr(arguments));
+                    console.log(this);
+                    return f.apply(this, a)
+                }
+            }
+
+            function partial_right(f) {
+                var args = arguments;
+                return function () {
+                    var a = arr(arguments);
+                    a = a.concat(arr(args, 1));
+                    console.log(this);
+                    return f.apply(this, a)
+                }
+            }
+
+            function partial(f) {
+                var args = arr(arguments);
+                return function () {
+                    var a = arr(args, 1);
+                    var i = 0, j = 0;
+                    for (; i < a.length; i++) {
+                        if (a[i] === undefined) {
+                            a[i] = arguments[j++];
+                        }
+                        a = a.concat(arr(arguments, j));
+                        return f.apply(this, a);
+                    }
+                }
+            }
+
+            function compose(f, g) {
+                return function () {
+                    return f.call(this, g.apply(this.arguments));
+                }
+            }
+        })();
+
+        // ;(function(){
+        //     var d = document.getElementById('che');
+        //     // var ifr = document.getElementById('che').contentWindow.document;
+        //     // var nav = ifr.getElementsByTagName('nav');
+        //     d.onload=function(){
+        //             // if(clicked=='yes')
+        //             // {
+        //                 d.contentDocument.body.style.background = 'red';
+        //             //     clicked='no';
+        //             // }
+        //             console.log("over");
+        //         }
+        //     // console.log(nav);
+        //     // nav[0].remove();
+        // })();
+    </script>
+
+
+</body>
+
+</html>

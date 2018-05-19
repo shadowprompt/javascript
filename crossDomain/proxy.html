@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>B域名的proxy.html</title>
+</head>
+
+<body>
+    <script>
+        window.onload = function() {
+            console.log('onload');
+            console.log(top);
+            console.log(self);
+            console.log(top == self)
+                //如果此页面未被嵌套时返回，不执行
+            if (top == self) return;
+
+            var arr = location.search.substr(1).split('&'),
+                fn, args;
+            for (var i = 0, len = arr.length, item; i < len; i++) {
+                item = arr[i].split('=');
+                if (item[0] == 'callback') {
+                    fn = item[1];
+                } else if (item[0] == 'args') {
+                    args = item[1];
+                }
+            }
+            console.log(fn,args);
+            try {
+                eval('top.' + fn + '("' + args + '")');
+                eval(fn + '("' + args + '")');
+            } catch (e) {
+
+            }
+
+            function cb(data){
+                console.log("执行cb",data);
+            }
+        }
+    </script>
+</body>
+
+</html>

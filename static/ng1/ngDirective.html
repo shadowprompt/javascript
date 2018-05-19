@@ -1,0 +1,386 @@
+<!doctype html>
+<html ng-app="myApp">
+<head>
+  <title>ngDirective</title>
+  <script src="js/Angular1.5.5.js"></script>
+  <style>
+    .odd {
+    background-color: blue;
+    }
+    .even {
+    background-color: red;
+    }
+
+    input.ng-invalid {
+      border: 1px solid red;
+    }
+    input.ng-valid {
+     border: 1px solid green;
+    }
+    .red {
+     background-color: red;
+    }
+  </style>
+</head>
+<body>
+
+  <ul ng-controller="PeopleController">
+    <li ng-repeat="person in people" ng-class="{even: $even, odd: $odd}">
+      {{person.name}} lives in {{person.city}}
+    </li>
+  </ul>
+
+  <div ng-init="greeting='HelloWorld'">
+    <p ng-bind="greeting"></p>
+    <p ng-cloak>{{ greeting }}</p>
+  </div>
+  同ng-bind指令类似，ng-bind-template用来在视图中绑定多个表达式。
+  <div ng-bind-template="{{message}}{{name}}">
+  </div>
+  
+  <div ng-controller="EquationController">
+    <input type="text" ng-model="equation.x" ng-change="change()" />
+    <code>{{ equation.output }}</code>
+  </div>
+
+  <form name="signup_form" ng-controller="FormController" ng-submit="submitForm()" novalidate>
+    <div ng-repeat="field in fields" ng-form="signup_form_input">
+     <input type="text" name="dynamic_input" ng-required="field.isRequired" ng-model="field.name" placeholder="{{field.placeholder}}" />
+     <div ng-show="signup_form_input.dynamic_input.$dirty && signup_form_input.dynamic_input.$invalid">
+      <span class="error" ng-show="signup_form_input.dynamic_input.$error.required">
+      The field is required.
+      </span>
+     </div>
+    </div>
+    <button type="submit" ng-disabled="signup_form.$invalid"> Submit All </button>
+  </form>
+
+  <div ng-controller="CityController">
+    <select ng-model="city" ng-options="city.name for city in cities">
+      <option value="">Choose City</option>
+    </select>
+    Best City: {{ city.name }}
+  </div>
+  
+  <div ng-controller="LotteryController">
+    <div ng-class="{red: x > 5}" ng-if="x > 5">
+    You won!
+    </div>
+    <button ng-click="x = generateNumber()" ng-init="x = 0">
+    Draw Number
+    </button>
+  <p>Number is: {{ x }}</p>
+  </div>
+  
+  <div ng-controller="scCtrl">
+    <div>指令外：{{ fromName }}</div>
+    <input type="text" ng-model="to"/>
+    <!-- 调用指令 -->
+    <div scope-example ng-model="to" on-send="sendMail(email)" from-name="ari@fullstack.io" cc="data[0]"/>
+  </div>
+  
+  <div sidebox title="Links">
+    <ul>
+      <li>First link</li>
+      <li>Second link</li>
+    </ul>
+  </div>
+  <div sidebox title="TagCloud">
+    <div class="tagcloud">
+      <a href="">Graphics</a>
+      <a href="">AngularJS</a>
+      <a href="">D3</a>
+      <a href="">Front-end</a>
+      <a href="">Startup</a>
+    </div>
+  </div>
+  
+  <div link></div>
+
+  <div ng-controller="MainController as main">
+    <input type="text" ng-model="main.name" />
+    <span>{{ main.name }}</span>
+  </div>
+  <div my-msg-dir></div>
+	
+	
+  
+  <level-one>
+      <level-two>
+          <level-three>
+              Hello 
+          </level-three>
+      </level-two>
+  </level-one>
+  
+	<form name="myForm">
+	 <div contenteditable name="myWidget" ng-model="userContent" strip-br="true" required>Change me!</div>
+	 <div ng-bind="userContent"></div>
+	  <span ng-show="myForm.myWidget.$error.required">Required!</span>
+	 <textarea ng-model="userContent"></textarea>
+	</form>
+	
+	<div ng-controller="CancelUpdateCtrl">
+		<form name="myForm" ng-model-options="{ updateOn: 'blur' }">
+			<p>With $cancelUpdate()</p>
+			<input name="myInput1" ng-model="myValue" ng-keydown="resetWithCancel($event)"><br/>
+			myValue: "{{ myValue }}"
+
+			<p>Without $cancelUpdate()</p>
+			<input name="myInput2" ng-model="myValue" ng-keydown="resetWithoutCancel($event)"><br/>
+			myValue: "{{ myValue }}"
+		 </form>
+	 </div>
+	 
+	<hr>
+	<form action="" name='myform' ng-controller="ctrl">
+		<input type="text" test ng-model="_val" name='jie'>
+		<div ng-show='myform.jie.$error.empty'>empty!!</div>
+	</form>
+  
+  <div re-dir></div>
+  <hr />
+  
+  <div ng-controller="m1Ctrl">
+    <clickable foo="foo" bar="bar"></clickable>
+    {{ hello }} <button ng-click="setHello()">Change hello</button>
+  </div>
+  
+  <div ng-controller="m2Ctrl">
+    <input ng-model="user.name" />
+    Name updated: {{updated}} times.
+  </div>
+
+  <script>
+    angular.module('myApp', [])
+    .controller('PeopleController',function($scope) {
+      $scope.people = [
+        {name: "Ari", city: "San Francisco"},
+        {name: "Erik", city: "Seattle"}
+      ];
+    })
+
+    .controller('EquationController',function($scope) {
+    $scope.equation = {};
+    $scope.change = function() {
+      $scope.equation.output  = parseInt($scope.equation.x) + 2;
+      };
+    })
+
+    .controller('FormController',function($scope) {
+      $scope.fields = [
+        {placeholder: 'Username', isRequired: true},
+        {placeholder: 'Password', isRequired: true},
+        {placeholder: 'Email (optional)', isRequired: false}
+      ];
+      $scope.submitForm = function() {
+        alert("it works!");
+      };
+    })
+
+    .controller('CityController',function($scope) {
+      $scope.cities = [
+        {name: 'Seattle'},
+        {name: 'San Francisco'},
+        {name: 'Chicago'},
+        {name: 'New York'},
+        {name: 'Boston'}
+      ];
+    })
+
+    .controller('LotteryController', function($scope) {
+      $scope.generateNumber = function() {
+        return Math.floor((Math.random()*10)+1);
+      };
+    })
+
+    .controller('scCtrl',  function($scope){
+      $scope.fromName = "张三";
+      $scope.data=[{name:"王五"},{name:"赵六"}]; 
+      $scope.sendMail = function(){
+        console.log("已点击");
+      }
+    })
+    .directive('scopeExample', function(){
+      return {
+        restrict: 'EA',
+        template:  '<div ng-click="onSend()">指令中：romName={{ fromName }}，cc={{ cc.name }}，ngModel={{ngModel}}，点击触发onSend()</div>',
+        scope: {
+          cc: '=',
+          ngModel: '=', // 将ngModel同指定对象绑定
+          onSend: '&', // 将引用传递给这个方法
+          fromName: '@' // 储存与fromName相关联的字符串
+        }
+      }
+    })
+
+    .directive('sidebox', function() {
+      return {
+        restrict: 'EA',
+        scope: {
+          title: '@'
+        },
+        transclude: true,  //下面的反斜杠表示告诉angularjs下面是多行
+        template: '<div class="sidebox">\
+                  <div class="content">\
+            <h2 class="header">{{ title }}</h2>\
+            <span class="content" ng-transclude>\
+            </span>\
+          </div>\
+        </div>'
+      };
+      //这段代码告诉AngularJS编译器，将它从DOM元素中获取的内容放到它发现ng-transclude指令的地方。
+    })
+
+    .directive('link', function() {
+      return {
+        restrict: 'EA',
+        transclude: true,
+        controller:
+          function($scope, $element, $transclude, $log) {
+            $transclude(function(clone) {
+              console.log(clone);
+              var a = angular.element('<a>');
+              a.attr('href', 'http://www.a.com');
+              a.text("text");
+              $log.info("Created new a tag in link directive");
+              $element.append(a);
+            });
+          }
+      };
+    })
+
+    .controller('MainController', function() {
+      this.name = "Ari";
+    })
+
+    .directive('myMsgDir', function() {
+      return {
+        restrict: 'A',
+        template: '<h4>{{ myController.msg }}</h4>',
+        controllerAs: 'myController',
+          controller: function() {
+            this.msg = "Hello World"
+          }
+      };
+    })
+
+    .directive('levelOne', createDirective('levelOne'))
+    .directive('levelTwo', createDirective('levelTwo'))
+    .directive('levelThree', createDirective('levelThree'))
+	
+	.directive('contenteditable', function() {
+		return { 
+			restrict: 'A', // 作为元素属性 
+			require: '?ngModel', // 获取ngModelController 
+			link: function(scope, element, attrs, ngModel) { 
+				if(!ngModel) return; // 如果没有ng-model则什么都不做
+			}
+		}
+	})
+	
+	.controller('CancelUpdateCtrl', function($scope) {
+		$scope.resetWithCancel = function (e) {
+			if (e.keyCode == 27) {
+			  $scope.myForm.myInput1.$cancelUpdate();
+			 // $scope.myValue = '';
+			}
+		};
+		$scope.resetWithoutCancel = function (e) {
+			if (e.keyCode == 27) {
+			 // $scope.myValue = '';
+			}
+		};
+	})
+	
+	.controller('ctrl', function ($scope){
+      $scope._val = "leifengshushu";
+    })
+  .directive('test', function(){
+    return{
+      restrict: 'AE',
+      require: 'ngModel',
+      link: function (scope,iElem,iAttr,ngmodel){
+        scope.$watch(function(){
+    				return scope._val
+    			},function(){
+    			  console.log(ngmodel);
+            if(ngmodel.$isEmpty(ngmodel.$viewValue)){
+              ngmodel.$setValidity('empty',false); //注意到这里设置为false，而$error.empty则会显示为true
+              console.log(ngmodel.$error);
+            }else{
+              ngmodel.$setValidity('empty',true);
+            }
+          }
+        )
+        //console.log(ngmodel.$setValidity);
+      }
+    }
+  })
+
+  .controller('m1Ctrl', function($scope) {
+    $scope.foo = 0;
+    $scope.bar = 0;
+    
+    $scope.hello = "Hello";
+    
+    $scope.setHello = function() {
+      $scope.hello = "World";
+    };
+  })
+
+  .directive('clickable', function() {
+
+    return {
+      restrict: "E",
+      scope: {
+        foo: '=',
+        bar: '='
+      },
+      template: '<ul style="background-color: lightblue"><li>{{foo}}</li><li>{{bar}}</li></ul>',
+      link: function(scope, element, attrs) {
+        element.bind('click', function() {
+          scope.foo++;
+          scope.bar++;
+          //scope.$apply();  
+          //apply是我们的$scope（或者是direcvie里的link函数中的scope）的一个函数，调用它会强制一次$digest循环（除非当前正在执行循环，这种情况下会抛出一个异常，这是我们不需要在那里执行$apply的标志）。
+        });
+      }
+    }
+
+  })
+
+  .controller('m2Ctrl', function($scope) {
+    $scope.user = { name: "Fox" };
+    
+    $scope.updated = 0;
+    
+    $scope.$watch('user', function(newValue, oldValue) {
+      if (newValue === oldValue) { return; }
+      $scope.updated++;
+    }, true); //$watch的function里面增加了第三个参数true，不设置true的话，比较新老对象是否相等则比较的是引用；加上true后比较的是值
+  })
+
+	
+    function createDirective(name){ 
+      return function(){
+        return {
+          restrict: 'E',
+          compile: function(tElem, tAttrs){
+            console.log(name + ': compile => ' + tElem.html());
+            return {
+              pre: function(scope, iElem, iAttrs){
+                console.log(name + ': pre link => ' + iElem.html());
+              },
+              post: function(scope, iElem, iAttrs){
+                console.log(name + ': post link => ' + iElem.html());
+              }
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+</body>
+</html>

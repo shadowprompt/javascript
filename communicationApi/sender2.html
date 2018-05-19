@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>跨域Sender</title>
+
+</head>
+<body>
+	<iframe id="myIFrame" src="http://localhost:8090/Front/communicationApi/listener.html" width="400"></iframe>
+</body>
+<script>
+//捕获iframe
+var domain = 'http://localhost:8090';
+var iframe = document.getElementById('myIFrame').contentWindow;
+
+
+//发送消息
+setInterval(function(){
+	var message = 'Hey!  The time is: ' + (new Date().getTime());
+	console.log('iframe:  sending message:  ' + message);
+        //send the message and target URI
+	iframe.postMessage(message,domain); 
+},2000);
+
+//监听消息反馈
+window.addEventListener('message',function(event) {
+	if(event.origin !== 'http://localhost:8090') return;
+	console.log('received answer:  ',event.data);
+},false);
+</script>
+</html>

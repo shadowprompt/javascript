@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Rxjs</title>
+    
+    <script src="RxJS/dist/rx.all.js"></script>
+    <script src="jquery-3.1.1.js"></script>
+</head>
+<body>
+    <input id="text"></input>
+    <script>
+        var text = document.querySelector('#text'), timer=null,currentSearch='';
+        text.addEventListener('keyup', (e) =>{
+            
+            // 发送输入内容到后台
+            clearTimeout(timer);
+            timer= setTimeout(() => {
+                console.log('发送请求');
+                currentSearch = '书';
+                var searchText = e.target.value;
+                $.ajax({
+                    url: `https://api.github.com/?callback=${searchText}`,
+                    type:'GET',
+                    dataType:'JSONP',
+                    success: data => {
+                      // 拿到后台返回数据，并展示搜索结果
+                      console.log(data);
+                      if (data.search === currentSearch) {
+                        // 渲染展示
+                        render(data);
+                      } else {
+                        // ..
+                        console.log('不渲染');
+                      }
+                    }
+                });
+            },250);
+            
+        });
+
+        //上面代码基本满足需求，但代码开始显得乱糟糟。我们来使用 RxJS 实现上面代码功能，如下
+
+        // var text = document.querySelector('#text');
+        // fromEvent 可以用来监听事件。当事件触发时，将事件 event 转成可流动的 Observable 进行传输。下面示例表示：监听文本框的 keyup 事件，触发 keyup 可以产生一系列的 event Observable。
+        // var inputStream = Rx.Observable.fromEvent(text, 'keyup') 
+        //                     .debounce(250)
+        //                     .pluck('target', 'value') //将输入的 event，输出成 event.target.value
+        //                     .flatMapLatest(url => Http.get(url))
+        //                     .subscribe(data => render(data));
+        
+        var Observable = Rx.Observable.create(observer => {
+            observer.onNext(2);//当我们订阅这个Observable，它通过调用onNext（）发射三个字符串给他的订阅者（监听者）
+            observer.onNext('最后一个');
+            observer.onCompleted();
+            return  () => console.log('disposed');
+        });
+
+        var Observer = Rx.Observer.create(
+            x => console.log('Next:', x),
+            err => console.log('Error:', err),
+            () => console.log('Completed')
+        );
+        var subscription = Observable.subscribe(Observer);
+        console.log(subscription);
+
+        //下面的代码相当于创建了一个流(2)，最终打印出2。
+        //just 可以将普通数据转换成流式数据 Observable。如上面的 Rx.Observable.just(2)。
+        Rx.Observable.just(2)subscribe(v => console.log(v));
+        //1、改变事件源，让 Observable 值 X 2
+        Rx.Observable.just(2 * 2 /* <= */).subscribe(v => console.log(v));
+
+        //2、改变响应方式，让 Observer 处理 X 2
+        Rx.Observable.just(2).subscribe(v => console.log(v * 2 /* <= */));
+
+        //3、优雅方案： RxJS 提供了优雅的处理方式，可以在事件源(Observable)与响应者(Observer)之间增加操作流的方法。
+        Rx.Observable.just(2)
+                     .map(v => v * 2) /* <= */
+                     .subscribe(v => console.log(v));
+        //map 操作跟数组操作的作用是一致的，不同的这里是将流进行改变，然后将新的流传出去。在 RxJS 中，把这类操作流的方式称之为 Operators(操作)。RxJS提供了一系列 Operators，像map、reduce、filter 等等。操作流将产生新流，从而保持流的不可变性，这也是 RxJS 中函数式编程的一点体现。
+    </script>
+</body>
+</html>

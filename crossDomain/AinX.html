@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>A域中的a.html</title>
+</head>
+
+<body>
+    <script>
+        function cb(data) {
+            console.log('成功接收数据 ', data);
+        }
+    </script>
+    <iframe name="proxyIframe" hidden=""></iframe>
+
+    <form action="http://localhost:8090/Javascript/crossDomain/proxy.html?callback=cb&args=data" target="proxyIframe" method="post">
+        <!-- <input type="text" name="callback" value="cb">
+        <input type="text" name="args" value="参数"> -->
+        <input type="submit" value="提交">
+    </form>
+</body>
+
+</html>

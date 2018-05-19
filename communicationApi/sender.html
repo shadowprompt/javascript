@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>跨域Sender</title>
+	
+</head>
+<body>
+	<iframe id="cc" src="http://localhost:8090/Front/communicationApi/receiver.html" width="200"></iframe>
+</body>
+<script>
+setInterval(function(){
+	document.getElementById("cc").contentWindow.postMessage((new Date().getTime()), "http://localhost:8090");
+}, 2000);
+</script>
+</html>

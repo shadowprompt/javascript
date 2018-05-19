@@ -1,0 +1,25 @@
+<h1>{{name}}!</h1>
+
+<p>
+  Add a new todo:
+  <input #newtodo type="text">
+  <button (click)="addTodo(newtodo.value); newtodo.value = ''">Add</button>
+</p>
+
+<p>Here's the list of pending todo items :</p>
+
+<ul>
+  <li *ngFor="let todo of todos; let index = index" [class.completed]="todo.completed">
+    <input type="checkbox" [checked]="todo.completed"
+      (change)="toggleCompletion(index)">
+    {{index}}.{{todo.label}} <button (click)="removeTodo(index)">Remove</button>
+  </li>
+</ul>
+<hr />
+Test place below:<br /><hr />
+
+states: 1.{{states.CONNECTING}}, 2.{{states.CONNECTED}}, 3.{{states["DISCONNECTED"]}}
+<br />
+par = {{par}}<br>
+
+<panel theTitle="pTitle" ppText="pTextt" inText="inTextt" #theP (click)="change()" (cp)="cc($event)"></panel>

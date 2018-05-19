@@ -1,1 +1,3 @@
-# javascriptdadf
+# javascript
+console.log(00)
+

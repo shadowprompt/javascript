@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+    <title>外卖</title>
+    <link rel="stylesheet" href="css/weui.min.css">
+    <link rel="stylesheet" href="css/seller.css">
+    <script src="js/jquery.min.js"></script>
+</head>
+<body>
+<div id="page">
+    <header>
+        <!--返回键与搜索框-->
+        <div class="shopBar">
+            <a href="javascript:window.history.back(-1);" class="back"><span class="back_icon"></span></a>
+            <div class="searchBox">
+                <span class="search_icon"></span>
+                <input type="text" name="" value="" placeholder="请输入商品名称关键字">
+            </div>
+        </div>
+        <!--logo和店名-->
+        <div class="flex">
+            <!--logo-->
+            <div id="logo">
+
+            </div>
+            <!--店名 归属机场  位置与电话-->
+            <div id="shopMessage">
+                <div class="flex">
+                    <div class="shop_name">必胜客</div>
+                    <div class="airport">苏南硕放国际机场</div>
+                </div>
+                <div class="shop_location flex">
+                    <span></span>
+                    <div class="local_tel">位置：无锡机场国内安检S2-30</div>
+                </div>
+                <div class="flex shop_tel">
+                    <span></span>
+                    <div class="local_tel">电话：021-13245412</div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!--商品与品牌故事-->
+    <div class="tip flex">
+        <div class="tip_pro"><span class="active">商品</span></div>
+        <div class="tip_story"><span>品牌故事</span></div>
+    </div>
+    <!--商品列表-->
+    <div id="shopping" class="flex">
+        <!--商品分类-->
+        <div id="shoppingClassification">
+            <ul id="myNav" class="navPills">
+                <li class="flex hot">
+                    <!--<div class="flex hot jump" >-->
+                        <!--<span class="hot_logo"></span>-->
+                        <img src="image/hotSelling.png" alt="" class="hot_logo">
+                        <a class="hot_sell" href="#hotSelling">热销</a>
+                    <!--</div>-->
+                </li>
+                <li><a href="#drink" class="jump">饮料</a></li>
+                <li><a href="#dishes" class="jump">凉菜</a></li>
+                <li><a href="#xiaochao" class="jump">小炒类</a></li>
+                <li>饮料</li>
+                <li>凉菜</li>
+                <li>小炒类</li>
+                <li>饮料</li>
+                <li>凉菜</li>
+                <li>小炒类</li>
+                <li>饮料</li>
+                <li>凉菜</li>
+                <li>小炒类</li>
+                <li>饮料</li>
+                <li>凉菜</li>
+                <li>小炒类</li>
+            </ul>
+        </div>
+        <!--商品单-->
+        <div id="shoppingList">
+            <div class="leftBorder" id="hotSelling">热销</div>
+            <ul>
+                <li>
+                    <div class="flex food_detail">
+                        <!--图片class food_img-->
+                        <div class="food_img"><img src="" alt=""></div>
+                        <div class="food_msg">
+                            <!--食物名称-->
+                            <div class="food_name">
+                                <span>芝士西蓝花炒蛋</span>
+                            </div>
+                            <!--月售份数 好评率-->
+                            <div class="food_num">
+                                月售<span>230</span>份
+                                好评率<span>100</span>%
+                            </div>
+                            <!--价格 及 数量-->
+                            <div class="priceNum" id="f002">
+                                <div class="food_mark left">¥<span class="food_price">43</span></div>
+                                <div class="flex count right">
+                                    <div class="food_decrease hide"><img src="image/decrease.png" alt=""></div>
+                                    <div class="food_order hide">0</div>
+                                    <div class="food_add"><img src="image/add.png" alt=""></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="flex food_detail">
+                        <!--图片class food_img-->
+                        <div class="food_img"><img src="" alt=""></div>
+                        <div class="food_msg">
+                            <!--食物名称-->
+                            <div class="food_name">
+                                <span>芝士西蓝花炒蛋</span>
+                            </div>
+                            <!--月售份数 好评率-->
+                            <div class="food_num">
+                                月售<span>230</span>份
+                                好评率<span>100%</span>
+                            </div>
+                            <!--价格 及 数量-->
+                            <div>
+                                <div class="food_mark left">¥<span class="food_price">43</span></div>
+                                <div class="right flex">
+                                    <div class="food_soldOut">已售完</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="flex food_detail">
+                        <!--图片class food_img-->
+                        <div class="food_img"><img src="" alt=""></div>
+                        <div class="food_msg">
+                            <!--食物名称-->
+                            <div class="food_name">
+                                <span>芝士西蓝花炒蛋</span>
+                                <span class="food_style right">多规格</span>
+                            </div>
+                            <!--月售份数 好评率-->
+                            <div class="food_num">
+                                月售<span>230</span>份
+                                好评率<span>100%</span>
+                            </div>
+                            <!--价格 及 数量-->
+                            <div class="priceNum" id="f001">
+                                <div class="food_mark left">¥<span class="food_price">43</span></div>
+                                <!--id为 uid -->
+                                <div class="right flex">
+                                    <div class="food_decrease hide"><img src="image/decrease.png" alt=""></div>
+                                    <div class="food_order hide">0</div>
+                                    <div class="food_add"><img src="image/add.png" alt=""></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="flex food_detail">
+                        <!--图片class food_img-->
+                        <div class="food_img"><img src="" alt=""></div>
+                        <div class="food_msg">
+                            <!--食物名称-->
+                            <div class="food_name">
+                                <span>芝士西蓝花炒蛋</span>
+                            </div>
+                            <!--月售份数 好评率-->
+                            <div class="food_num">
+                                月售<span>230</span>份
+                                好评率<span>100%</span>
+                            </div>
+                            <!--价格 及 数量-->
+                            <div class="priceNum" id="f009">
+                                <div class="food_mark left">¥<span class="food_price">43</span></div>
+                                <div class="right">
+                                    <div class="food_soldOut">已售完</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+            <div class="leftBorder" id="drink">饮料</div>
+            <ul>
+                <li>
+                    <div class="flex food_detail">
+                        <!--图片class food_img-->
+                        <div class="food_img"><img src="" alt=""></div>
+                        <div class="food_msg">
+                            <!--食物名称-->
+                            <div class="food_name">
+                                <span>芝士西蓝花炒蛋</span>
+                            </div>
+                            <!--月售份数 好评率-->
+                            <div class="food_num">
+                                月售<span>230</span>份
+                                好评率<span>100%</span>
+                            </div>
+                            <!--价格 及 数量-->
+                            <div class="priceNum" id="f003">
+                                <div class="food_mark left">¥<span class="food_price">43</span></div>
+                                <div class="flex count right">
+                                    <div class="food_decrease hide"><img src="image/decrease.png" alt=""></div>
+                                    <div class="food_order hide">0</div>
+                                    <div class="food_add"><img src="image/add.png" alt=""></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="flex food_detail">
+                        <!--图片class food_img-->
+                        <div class="food_img"><img src="" alt=""></div>
+                        <div class="food_msg">
+                            <!--食物名称-->
+                            <div class="food_name">芝士西蓝花炒蛋</div>
+                            <!--月售份数 好评率-->
+                            <div class="food_num">
+                                月售<span>230</span>份
+                                好评率<span>100%</span>
+                            </div>
+                            <!--价格 及 数量-->
+                            <div>
+                                <div class="food_mark left">¥<span class="food_price">43</span></div>
+                                <div class="right">
+                                    <div class="food_soldOut">已售完</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="flex food_detail">
+                        <!--图片class food_img-->
+                        <div class="food_img"><img src="" alt=""></div>
+                        <div class="food_msg">
+                            <!--食物名称-->
+                            <div class="food_name">
+                                <span>芝士西蓝花炒蛋</span>
+                                <span class="food_style right">多规格</span>
+                            </div>
+                            <!--月售份数 好评率-->
+                            <div class="food_num">
+                                月售<span>230</span>份
+                                好评率<span>100%</span>
+                            </div>
+                            <!--价格 及 数量-->
+                            <div class="priceNum" id="f004">
+                                <div class="food_mark left">¥<span class="food_price">43</span></div>
+                                <!--id为 uid -->
+                                <div class="right flex">
+                                    <div class="food_decrease hide"><img src="image/decrease.png" alt=""></div>
+                                    <div class="food_order hide">0</div>
+                                    <div class="food_add"><img src="image/add.png" alt=""></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="flex food_detail">
+                        <!--图片class food_img-->
+                        <div class="food_img"><img src="" alt=""></div>
+                        <div class="food_msg">
+                            <!--食物名称-->
+                            <div class="food_name">芝士西蓝花炒蛋</div>
+                            <!--月售份数 好评率-->
+                            <div class="food_num">
+                                月售<span>230</span>份
+                                好评率<span>100%</span>
+                            </div>
+                            <!--价格 及 数量-->
+                            <div class="priceNum" id="f010">
+                                <div class="food_mark left">¥<span class="food_price">43</span></div>
+                                <div class="right">
+                                    <div class="food_soldOut">已售完</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+            <div class="leftBorder" id="dishes">凉菜</div>
+            <ul>
+                <li>
+                    <div class="flex food_detail">
+                        <!--图片class food_img-->
+                        <div class="food_img"><img src="" alt=""></div>
+                        <div class="food_msg">
+                            <!--食物名称-->
+                            <div class="food_name">芝士西蓝花炒蛋</div>
+                            <!--月售份数 好评率-->
+                            <div class="food_num">
+                                月售<span>230</span>份
+                                好评率<span>100%</span>
+                            </div>
+                            <!--价格 及 数量-->
+                            <div class="priceNum" id="f011">
+                                <div class="food_mark left">¥<span class="food_price">43</span></div>
+                                <div class="flex count right" id="002">
+                                    <div class="food_decrease hide"><img src="image/decrease.png" alt=""></div>
+                                    <div class="food_order hide">0</div>
+                                    <div class="food_add"><img src="image/add.png" alt=""></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="flex food_detail">
+                        <!--图片class food_img-->
+                        <div class="food_img"><img src="" alt=""></div>
+                        <div class="food_msg">
+                            <!--食物名称-->
+                            <div class="food_name">芝士西蓝花炒蛋</div>
+                            <!--月售份数 好评率-->
+                            <div class="food_num">
+                                月售<span>230</span>份
+                                好评率<span>100%</span>
+                            </div>
+                            <!--价格 及 数量-->
+                            <div class="priceNum" id="f014">
+                                <div class="food_mark left">¥<span class="food_price">43</span></div>
+                                <div class="right">
+                                    <div class="food_soldOut">已售完</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="flex food_detail">
+                        <!--图片class food_img-->
+                        <div class="food_img"><img src="" alt=""></div>
+                        <div class="food_msg">
+                            <!--食物名称-->
+                            <div class="food_name">
+                                芝士西蓝花炒蛋
+                                <span class="food_style right">多规格</span>
+                            </div>
+                            <!--月售份数 好评率-->
+                            <div class="food_num">
+                                月售<span>230</span>份
+                                好评率<span>100%</span>
+                            </div>
+                            <!--价格 及 数量-->
+                            <div class="priceNum" id="f006">
+                                <div class="food_mark left">¥<span class="food_price">43</span></div>
+                                <!--id为 uid -->
+                                <div class="right flex">
+                                    <div class="food_decrease hide"><img src="image/decrease.png" alt=""></div>
+                                    <div class="food_order hide">0</div>
+                                    <div class="food_add"><img src="image/add.png" alt=""></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="flex food_detail">
+                        <!--图片class food_img-->
+                        <div class="food_img"><img src="" alt=""></div>
+                        <div class="food_msg">
+                            <!--食物名称-->
+                            <div class="food_name">芝士西蓝花炒蛋</div>
+                            <!--月售份数 好评率-->
+                            <div class="food_num">
+                                月售<span>230</span>份
+                                好评率<span>100%</span>
+                            </div>
+                            <!--价格 及 数量-->
+                            <div class="priceNum" id="f012">
+                                <div class="food_mark left">¥<span class="food_price">43</span></div>
+                                <div class="right">
+                                    <div class="food_soldOut">已售完</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+            <div class="leftBorder" id="xiaochao">小炒类</div>
+            <ul>
+                <li>
+                    <div class="flex food_detail">
+                        <!--图片class food_img-->
+                        <div class="food_img"><img src="" alt=""></div>
+                        <div class="food_msg">
+                            <!--食物名称-->
+                            <div class="food_name">芝士西蓝花炒蛋</div>
+                            <!--月售份数 好评率-->
+                            <div class="food_num">
+                                月售<span>230</span>份
+                                好评率<span>100%</span>
+                            </div>
+                            <!--价格 及 数量-->
+                            <div class="priceNum" id="f005">
+                                <div class="food_mark left">¥<span class="food_price">43</span></div>
+                                <div class="flex count right">
+                                    <div class="food_decrease hide"><img src="image/decrease.png" alt=""></div>
+                                    <div class="food_order hide">0</div>
+                                    <div class="food_add"><img src="image/add.png" alt=""></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="flex food_detail">
+                        <!--图片class food_img-->
+                        <div class="food_img"><img src="" alt=""></div>
+                        <div class="food_msg">
+                            <!--食物名称-->
+                            <div class="food_name">芝士西蓝花炒蛋</div>
+                            <!--月售份数 好评率-->
+                            <div class="food_num">
+                                月售<span>230</span>份
+                                好评率<span>100%</span>
+                            </div>
+                            <!--价格 及 数量-->
+                            <div class="priceNum" id="f015">
+                                <div class="food_mark left">¥<span class="food_price">43</span></div>
+                                <div class="right">
+                                    <div class="food_soldOut">已售完</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="flex food_detail">
+                        <!--图片class food_img-->
+                        <div class="food_img"><img src="" alt=""></div>
+                        <div class="food_msg">
+                            <!--食物名称-->
+                            <div class="food_name">
+                                芝士西蓝花炒蛋
+                                <span class="food_style right">多规格</span>
+                            </div>
+                            <!--月售份数 好评率-->
+                            <div class="food_num">
+                                月售<span>230</span>份
+                                好评率<span>100%</span>
+                            </div>
+                            <!--价格 及 数量-->
+                            <div class="priceNum" id="f008">
+                                <div class="food_mark left">¥<span class="food_price">43</span></div>
+                                <!--id为 uid -->
+                                <div class="right flex" id="001">
+                                    <div class="food_decrease hide"><img src="image/decrease.png" alt=""></div>
+                                    <div class="food_order hide">0</div>
+                                    <div class="food_add"><img src="image/add.png" alt=""></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="flex food_detail">
+                        <!--图片class food_img-->
+                        <div class="food_img"><img src="" alt=""></div>
+                        <div class="food_msg">
+                            <!--食物名称-->
+                            <div class="food_name">芝士西蓝花炒蛋</div>
+                            <!--月售份数 好评率-->
+                            <div class="food_num">
+                                月售<span>230</span>份
+                                好评率<span>100%</span>
+                            </div>
+                            <!--价格 及 数量-->
+                            <div class="priceNum" id="f013">
+                                <div class="food_mark left">¥<span class="food_price">43</span></div>
+                                <div class="right">
+                                    <div class="food_soldOut">已售完</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <!--底部购物车-->
+    <div id="shoppingCar" class="flex">
+        <!--购物信息-->
+        <div id="car">
+            <!--购物车信息-->
+            <div id="myCar">
+                <span id="num">1</span>
+            </div>
+            <!--购物价格-->
+            <div id="bill">
+                ¥
+                <span id="total">43</span>
+            </div>
+        </div>
+        <!--买单-->
+        <div id="payment">
+            去买单
+        </div>
+    </div>
+    <!--品牌故事-->
+    <div id="brandStory" class="hide">
+        <div>
+            爱是大师级的哈克时间的话卡诗
+            啊是打算大所多
+            阿打算打算打
+            啊是打算大所多
+        </div>
+    </div>
+</div>
+<!--遮罩层样式-->
+<div id="style" class="hide">
+    <div class="item">
+        <b id="itemName">重庆毛血旺</b>
+        <span class="close"></span>
+    </div>
+    <div class="chooseStyle">规格：</div>
+    <div class="styleList">
+        <ul>
+            <li class="active">微辣</li>
+            <li>中辣</li>
+            <li>重辣</li>
+        </ul>
+    </div>
+    <div class="choose">
+        <div class="bill">
+            ¥
+            <span id="itemPrice"></span>
+        </div>
+        <div class="chooseWell" id="confirm">选好了</div>
+    </div>
+</div>
+<div id="bg" class="hide"></div>
+<script src="js/interface.js"></script>
+<script src="js/viewport.js"></script>
+<script src="js/weui.min.js"></script>
+<script src="js/sell.js"></script>
+</body>
+</html>

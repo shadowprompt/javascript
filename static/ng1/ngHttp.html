@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+<head>
+	<meta charset="UTF-8">
+	<title>Http</title>
+	<script src="js/Angular1.5.5.js" ></script>
+	<script src="js/angular-resource.js"></script>
+	<script src="js/lodash.js"></script>	
+	<script src="js/restangular.js"></script>		
+</head>
+<body>
+	<script>
+		var app = angular.module('myApp', ['ngResource', 'restangular']);
+		app.config(function($httpProvider){
+			$httpProvider.interceptors.push('myInterceptor');
+			$httpProvider.defaults.headers.common['X-Requested-By'] = 'MyAngularApp';
+			$httpProvider.defaults.headers.common['X-Auth'] = 'RandomString';
+			console.log($httpProvider);
+		});
+		app.controller('httpCtrl', function($scope, $http, $cacheFactory) {
+			var blob = new Blob(['Hello'], {type: 'text/plain'});
+			// var lru = $cacheFactory('lru', {
+			// 	capacity: 20
+			// });
+
+		    $http({
+		    	method: "GET",
+		    	url: 'Customers_JSON.php',
+		    	params: {
+		    		'username': 'auser'
+		    	},
+		    	//cache: lru
+		    })
+		    .then(function(resp){
+		    	console.log(resp);
+		    }),function(resp){
+		    	console.log("error");
+		    }
+		});
+		app.factory('myInterceptor', function($q){
+			var interceptor = {
+				'request': function(config){
+					console.log(config);
+					return config;
+				},
+				'response': function(response){
+					console.log(response);
+					return response;
+				},
+				'requestError': function(rejection){
+					return $q.reject(rejection);
+				},
+				'responseError': function(responseError){
+					return $q.reject(rejection);
+				}
+			};
+			return interceptor;
+		});
+		app.controller('resCtrl', function($scope, $resource){
+			var User = $resource('Customers_JSON.php',{
+				userId: '@id',	
+			});
+			console.log(User);
+			User.get(function(resp){
+				console.log("success");
+			}),function(err){
+				console.log("error");
+			}
+		});
+		// app.controller("testCtrl", ["$resource",testCtrl]);
+		// function testCtrl($resource) {
+		//   var myResource = $resource("/url/_url", {}, {
+		//       myPost: {
+		//           method: "post",
+		//           url: "/newUrl/_newUrl",
+		//           params: { id: "4" },
+		//           interceptor: {
+		//               response: function (d) {
+		//                   console.log(d);
+		//               },
+		//               responseError: function (d) {
+		//                   console.log(d);//这里的是随便写的地址，所以执行了error里的函数，可打印看参数及结果
+		//               }
+		//           }
+		//       }
+		//   });
+		//   myResource.get({ id: "1" }, function (d) {
+		//       console.log(d);
+		//   }, function (d) {
+		//       console.log(d);//这里的是随便写的地址，所以执行了error里的函数，可打印看参数及结果
+		//   });
+		//   myResource.query({ content: "text" }, function (d) {
+		//       console.log(d);
+		//   }, function (d) {
+		//       console.log(d);//这里的是随便写的地址，所以执行了error里的函数，可打印看参数及结果
+		//   });
+		//   myResource.save({ text: "Hello World" }, { text: "Hello World" }, function (d) {
+		//       console.log(d);
+		//   }, function (d) {
+		//       console.log(d);//这里的是随便写的地址，所以执行了error里的函数，可打印看参数及结果
+		//   });
+		//   myResource.remove({ text: "Hello World" }, { text: "Hello World" }, function (d) {
+		//       console.log(d);
+		//   }, function (d) {
+		//       console.log(d);//这里的是随便写的地址，所以执行了error里的函数，可打印看参数及结果
+		//   });
+		//   myResource.delete({ text: "Hello World" }, { text: "Hello World" }, function (d) {
+		//       console.log(d);
+		//   }, function (d) {
+		//       console.log(d);//这里的是随便写的地址，所以执行了error里的函数，可打印看参数及结果
+		//   });
+		//   var newResource = new myResource();
+		//   newResource.$save({ id: "2" }, function (d) {
+		//       console.log(d);
+		//   }, function (d) {
+		//       console.log(d);//这里的是随便写的地址，所以执行了error里的函数，可打印看参数及结果
+		//   });
+		//   newResource.$remove({ id: "3" }, function (d) {
+		//       console.log(d);
+		//   }, function (d) {
+		//       console.log(d);//这里的是随便写的地址，所以执行了error里的函数，可打印看参数及结果
+		//   });
+		//   myResource.myPost();
+		// };
+		// app.factory('restFac', ['Restangular', function($scope, Restangular){
+		// 	var restAngular = Restangular.withConfig(function(Configurer){
+		// 		Configurer.setBaseUrl('/api/v2/messages');
+		// 	});
+		// 	return {
+		// 		getMessages: function(){
+		// 			return 'cc';
+		// 		}
+		// 	}
+		// }]);
+		// app.controller('restCtrl', function($scope, restFac){
+
+		// });
+		
+	</script>
+
+	<div ng-controller="httpCtrl"></div>
+	<div ng-controller="resCtrl"></div>
+	<!-- <div ng-controller="testCtrl"></div>
+	<div ng-controller="restCtrl"></div> -->
+	
+
+</body>
+</html>

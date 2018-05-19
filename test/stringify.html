@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>跨域和JSON.stringify和JSON.parse方法</title>
+    <script>
+        function JSONP_getUsers(users){
+
+//          JSON.stringify(value[, replacer [, space]])，该方法是将任意的 JavaScript 值序列化成 符合JSON语法的 字符串。后面两个参数可选
+            console.log(JSON.stringify(users, ['name', 'test'], 2));//使用数组
+            //使用函数
+            console.log(JSON.stringify(users, function (key, value) {
+                if(key == "age"){
+                    return 444;
+                }
+                return value;
+            }, 2));
+            //如果一个被序列化的对象拥有 toJSON 方法，那么该 toJSON 方法就会覆盖该对象默认的序列化行为：不是那个对象被序列化，而是调用 toJSON 方法后的返回值会被序列化
+//            console.log(JSON.stringify({x: users}));
+        }
+
+        function jsFriendlyJSONStringify (s) {
+            return JSON.stringify(s).
+            replace(/\u2028/g, '\\u2028').
+            replace(/\u2029/g, '\\u2029');
+        }
+
+        var s = {
+            a: String.fromCharCode(0x2028),
+            b: String.fromCharCode(0x2029)
+        };
+        try {
+//            eval('(' + JSON.stringify(s) + ')');
+            var s = JSON.stringify(s);
+            console.log(s);
+            eval( JSON.stringify(s) );
+        } catch (e) {
+            console.log(e); // "SyntaxError: unterminated string literal"
+        }
+
+        // No need for a catch
+        eval('(' + jsFriendlyJSONStringify(s) + ')');
+
+        // console.log in Firefox unescapes the Unicode if
+        //   logged to console, so we use alert
+        console.log(jsFriendlyJSONStringify(s)); // {"a":"\u2028","b":"\u2029"}
+
+        var session = {
+            'screens' : [],
+            'state' : true
+        };
+        session.screens.push({"name":"screenA", "width":450, "height":250});
+        session.screens.push({"name":"screenB", "width":650, "height":350});
+        session.screens.push({"name":"screenC", "width":750, "height":120});
+        session.screens.push({"name":"screenD", "width":250, "height":60});
+        session.screens.push({"name":"screenE", "width":390, "height":120});
+        session.screens.push({"name":"screenF", "width":1240, "height":650});
+
+        // 使用 JSON.stringify 转换为 JSON 字符串
+        // 然后使用 localStorage 保存在 session 名称里
+        localStorage.setItem('session', JSON.stringify(session));
+
+        // 然后是如何转换通过 JSON.stringify 生成的字符串，该字符串以 JSON 格式保存在 localStorage 里
+        var ls = localStorage.getItem('session');
+        console.log(ls);
+        var restoredSession = JSON.parse(ls);
+
+        // 现在 restoredSession 包含了保存在 localStorage 里的对象
+        console.log(restoredSession);
+    </script>
+    跨域部分
+    <script src="http://127.0.0.1/getUsers.js"></script>
+    使用 JSON.stringify 结合 localStorage 的例子
+
+    一些时候，你想存储用户创建的一个对象，并且，即使在浏览器被关闭后仍能恢复该对象。下面的例子是 JSON.stringify 适用于这种情形的一个样板
+    <script type="text/javascript">
+        var res1 = JSON.parse('{"p": 5}', function(k, v) {
+            if (k === '') { return v; } 
+            return v * 2;               
+        });
+        console.log(res1);
+        var res2 = JSON.parse('{"1": 1, "2": 2, "3": {"4": 4, "5": {"6": 6}}}', function(k, v) {
+            console.log(k);
+            console.log("......值为......");
+            console.log( v );// 输出当前属性，最后一个为 ""
+            return v;       // 返回修改的值
+        });
+        console.log(res2);
+    </script>
+</head>
+<body>
+
+</body>
+</html>

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scroll</title>
+    <style type="text/css" media="screen">
+        .main{
+            overflow-y: auto;
+            height: 640px;
+        }
+        .main>div{
+            border: 1px solid black;
+            margin-bottom: 10px;
+        }
+        .area0{
+            height: 100px;
+            background: red;
+        }
+        .area1{
+            height: 300px;
+            background: yellow;
+        }
+        .area2{
+            height: 400px;
+            background: blue;
+        }
+        .area3{
+            height: 200px;
+            background: red;
+        }
+        .area4{
+            height: 800px;
+            background: green;
+        }
+        nav{
+            position: fixed;
+            top: 150px;
+            right: 0;
+            background-color: gray;
+        }
+        .active{
+            background: red;
+        }
+    </style>
+</head>
+<body>
+    <div class="main">
+        <div class="area0" id="item0">零</div>
+        <div class="area1" id="item1">一</div>
+        <div class="area2" id="item2">二</div>
+        <div class="area3" id="item3">三</div>
+        <div class="area4" id="item4">四</div>
+        <nav class="">
+            <ul>
+                <li class="active"><a href="#item0">第零个</a></li>
+                <li><a href="#item1">第一个</a></li>
+                <li><a href="#item2">第二个</a></li>
+                <li><a href="#item3">第三个</a></li>
+                <li><a href="#item4">第四个</a></li>
+            </ul>
+        </nav>
+    </div>
+    <script src="../../static/jquery-3.1.1.js"></script>
+    <script src="../../static/underscore-1.8.3.js"></script>
+    <script>
+        var arrs = document.querySelectorAll('.main div');
+        var liArr = document.querySelectorAll('li');
+        var arrsHeights = [arrs[0].offsetHeight];
+
+        for(var i=1;i<arrs.length-1;i++){
+            arrsHeights.push(arrsHeights[i-1] + arrs[i].offsetHeight);
+        }
+        console.log(arrsHeights);
+        function scrollFn (argument) {
+            for(var j=arrsHeights.length-1;j>=0;j--){
+                // console.log('scrollTop/arrs/j= ' + $('.main')[0].scrollTop + '/' + arrsHeights[j] + '/' + j);
+                if( $('.main')[0].scrollTop + 150 >arrsHeights[j]){
+                    $(liArr[j+1]).addClass('active').siblings().removeClass('active');
+                    console.log("j= " + j);
+                    break;
+                }
+            }
+        };
+        // $('.main').on('scroll', scrollFn);
+
+        $('li').on('click', function(){
+            $('.main').off('scroll');
+            $(this).addClass('active').siblings().removeClass('active');
+            setTimeout(function(){
+                $('.main').on('scroll', throttled);
+            },500);
+
+        })
+
+        var throttled = _.throttle(scrollFn, 300, {
+            leading: false,
+            trailing: false
+        });
+        $('.main').scroll(throttled);
+    </script>
+</body>
+</html>
