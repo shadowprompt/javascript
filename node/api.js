@@ -69,7 +69,7 @@ app.get('/api/page/:index', function(req, res) {
             //     if(err){
             //         console.log('插入数据失败');
             //     }else{
-            //         console.log('插入数据成功');
+            //         console.log('插入数据成功.....');
             //     }
             // })
         }

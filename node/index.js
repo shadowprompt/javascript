@@ -1,39 +1,83 @@
 var http = require('http');
 var bodyParser = require('body-parser');
 var express = require('express');
-var qs=require('querystring');//解析参数的库
+var qs = require('querystring'); //解析参数的库
 var app = express();
-app.use(bodyParser.urlencoded({ extended: false }));
+// var jsdom = require("jsdom");
+var jsdom = require("jsdom/lib/old-api.js"); // 老版本
+var url = require("url");
 
-require("jsdom").env("", function(err, window) {
+var fs = require('fs');
+
+
+console.log('url', url);
+
+var ll = new url.URL('http://10.8.92.226:9100/webjars/springfox-swagger-ui/images/logo_small.png');
+var localFile = __dirname + '/api.js';
+
+fs.stat(localFile, function (err, stats) {
+    console.log(err, stats);
+});
+
+var file = fs.createReadStream(__dirname + '/fileStatsInfo.png', {
+    encoding: 'utf8',
+    start:0,
+    // end:10,
+});
+
+var out = fs.createWriteStream(__dirname + '/test.js');
+
+// file.pause();
+
+// setTimeout(()=>file.resume(), 2000);
+
+file.on('data', data=>{
+    out.write(data, ()=>{
+        // console.log('d', data);
+    })
+})
+
+out.on('drain', ()=>{
+    console.log('写完了', out.bytesWritten);
+})
+
+
+
+app.use(bodyParser.urlencoded({
+    extended: false
+}));
+
+jsdom.env("", function (err, window) {
     if (err) {
         console.error(err);
         return;
     }
     $ = require("jquery")(window);
     $("body").append("<div>TEST</div>");
-    console.log($("body").html());
 });
 
-app.get('/', function(req, res){
-	//或提示建议用sendFile，但是那样得提供绝对路径
-	res.sendfile('./index.html');
-});
+app.use('/public', express.static('./public'))
+// app.get('/', function (req, res) {
+//     //或提示建议用sendFile，但是那样得提供绝对路径
+//     res.sendfile('./index.html', {
+//         root: __dirname
+//     });
+// });
 
-app.get('/test', function(req, res){
+app.get('/test', function (req, res) {
     var cb = req.query.callback;
     console.log(cb);
     // typeof cb == 'function' && console.log('d');
 });
 
-app.post('/login', function(req, res){
-	var username = req.body.username;
-	var password = req.body.password;
-	console.log('username = ' + username + ', password = ' + password);
+app.post('/login', function (req, res) {
+    var username = req.body.username;
+    var password = req.body.password;
+    console.log('username = ' + username + ', password = ' + password);
 });
 
-app.listen(3000, function(){
-	console.log("started on port 3000");
+app.listen(3000, function () {
+    console.log("started on port 3000");
 })
 
 // var server = http.createServer(function (req, res) {
