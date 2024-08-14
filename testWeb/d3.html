@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>d3 test</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="./dataJson.js"></script>
+    <script src="./d3.js"></script>
+</head>
+
+<body>
+    <div>测试</div>
+    <div id="container"></div>
+    <script type="module">
+function getSummaryFromList(list) {
+  const max =  list.reduce((acc, [, value]) => Math.max(acc, value), -Infinity);
+  const min =  list.reduce((acc, [, value]) => Math.min(acc, value), Infinity);
+  const total =  list.reduce((acc, [, value]) => acc + value * 1, 0);
+  const avg = list.length > 0 ? (total / list.length).toFixed(3) * 1 : 0;
+  return {
+    min: [NaN, -Infinity, Infinity].includes(min) ? 0 : min,
+    max: [NaN, -Infinity, Infinity].includes(max) ? 0 : max,
+    total: [NaN, -Infinity, Infinity].includes(total) ? 0 : total,
+    avg: [NaN, -Infinity, Infinity].includes(avg) ? 0 : avg,
+  }
+}
+
+
+        // Declare the chart dimensions and margins.
+const width = 640;
+const height = 400;
+const marginTop = 20;
+const marginRight = 20;
+const marginBottom = 80;
+const marginLeft = 40;
+
+const trackList = window.dataJson.trackList || [];
+
+// Declare the x (horizontal position) scale.
+// const x = d3.scaleUtc()
+//     .domain([new Date("2023-01-01"), new Date("2024-01-01")])
+//     .range([marginLeft, width - marginRight]);
+
+
+const firstTrack = trackList[0];
+const lastTrack = trackList[trackList.length - 1];
+
+const timeList = trackList.filter(item => item.Time).map(item => [0, new Date(item.Time).getTime()]);
+const timeListSummary = getSummaryFromList(timeList);
+
+const heartRateList = trackList.filter(item => item.HeartRateBpm).map(item => [0, item.HeartRateBpm.Value * 1]);
+const heartRateListSummary = getSummaryFromList(heartRateList);
+
+const x = d3.scaleUtc()
+    .domain([timeListSummary.min, timeListSummary.max])
+    .range([marginLeft, width - marginRight]);
+
+// Declare the y (vertical position) scale.
+const y = d3.scaleLinear()
+    .domain([heartRateListSummary.min, heartRateListSummary.max])
+    .range([height - marginBottom, marginTop]);
+
+// Create the SVG container.
+const svg = d3.create("svg")
+    .attr("width", width)
+    .attr("height", height);
+
+// Add the x-axis.
+svg.append("g")
+    .attr("transform", `translate(0,${height - marginBottom})`)
+    .call(d3.axisBottom(x));
+
+// Add the y-axis.
+svg.append("g")
+    .attr("transform", `translate(${marginLeft},0)`)
+    .call(d3.axisLeft(y));
+
+// Append a path for the line.
+// // Declare the line generator.
+  const line = d3.line()
+      .x(d => {
+        const dataX = x(new Date(d.Time).getTime());
+        console.log(d.Time, dataX);
+        return dataX;
+      })
+      .y(d => y(d.HeartRateBpm?.Value || 0));
+
+  svg.append("path")
+      .attr("fill", "none")
+      .attr("stroke", "steelblue")
+      .attr("stroke-width", 1.5)
+      .attr("d", line(trackList));
+
+
+// Append the SVG element.
+container.append(svg.node());
+
+</script>
+</body>
+
+</html>

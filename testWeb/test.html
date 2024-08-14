@@ -1,0 +1,65 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>text Upper</title>
+    <meta name="referrer" content="origin">
+     <style>html{height: 100%}body{ font-size: 44px;color: red;height: 100%;}</style>
+</head>
+<body>
+    <div contenteditable="true" name=""  id="editableInput" style="width: 300px;height:300px;border: 1px solid red;"></div>
+</body>
+
+<script>
+    function capitalizeTextFirstLetter(s) {
+    if (['', null, void 0].includes(s) || s.trim() === '') {
+        return s;
+    }
+    const i = s.search(/\S|$/);
+    return s.substring(0, i) + s.substring(i, i + 1).toUpperCase() + s.substring(i + 1).toLowerCase();
+}
+
+function capitalizeSentenceFirstLetter(text) {
+    const reg =  /(\r\n\n|\n\n|\n\r\n\r|\r\n|\n\r|\r\n\r\n|\r|\n)+|([.\/!$?;:{}()])+/gm;
+    let index = 0;
+    const result = [];
+
+    while(true) {
+        let r = reg.exec(text);
+        const str = text.substring(index, r ? r.index : text.length);
+        result.push(capitalizeTextFirstLetter(str));
+
+        index = reg.lastIndex;
+        if (r) {
+            result.push(r[0])
+        } else {
+            break;
+        }
+    }
+    return result.join('');
+}
+
+</script>
+<script>
+    var letterInputItem = document.querySelector('#editableInput');
+    letterInputItem.addEventListener('keyup', (e) => {
+
+        const range = window.getSelection().getRangeAt(0);
+        const commonAncestorContainer = range.commonAncestorContainer;
+        if (commonAncestorContainer.nodeType === 3) {
+            let start = range.startOffset;
+            let end = range.endOffset;
+            const text = commonAncestorContainer.textContent;
+            const newText = capitalizeSentenceFirstLetter(text);
+            console.log(' abb~ ', start, end, text, newText);
+            commonAncestorContainer.textContent = newText;
+            const newRange = range.cloneRange();
+            newRange.setStart(commonAncestorContainer, start);
+            newRange.setEnd(commonAncestorContainer, end);
+            // target.innerText = chatInputTxt;
+            window.getSelection().removeAllRanges();
+            window.getSelection().addRange(newRange);
+        }
+    })
+</script>
+</html>
