@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>测试输入首字母大写</title>
+</head>
+<body>
+<div>测试输入首字母大写</div>
+<textarea name=""  id="letterInput" rows="10" ></textarea>
+<script>
+  function inputText(text) {
+
+    function upper(s) {
+      if (['', null].includes(s) || s.trim() === '') {
+        return s;
+
+      }
+      const i = s.search(/\S|$/);
+
+      return s.substring(0, i) + s.substr(i, 1).toUpperCase() + s.substring(i + 1).toLowerCase();
+
+      return s[0].toUpperCase() + s.slice(1).toLowerCase();
+    }
+
+    var reg =  /(\r\n\n|\n\n|\n\r\n\r|\r\n|\n\r|\r\n\r\n|\r|\n)+|([.\/!$?;:{}()])+/gm;
+    var index = 0;
+    var result = [];
+
+    while(true) {
+      let r = reg.exec(text);
+      const str = text.substring(index, r ? r.index : text.length);
+      result.push(upper(str));
+
+      index = reg.lastIndex;
+      if (r) {
+        result.push(r[0])
+      } else {
+        break;
+      }
+    }
+
+    return result.join('');
+
+  }
+</script>
+<script>
+  var letterInputItem = document.querySelector('#letterInput');
+  letterInputItem.addEventListener('keydown', (e) => {
+    const text = inputText(letterInputItem.value);
+    letterInputItem.value = text;
+  })
+</script>
+</body>
+</html>
